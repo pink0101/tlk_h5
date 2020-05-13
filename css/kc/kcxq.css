@@ -1,0 +1,422 @@
+.bg{
+  display: flex;
+  align-items:flex-start !important ;
+  padding-top: 0.7rem;
+  height:5.4rem !important;
+  background:linear-gradient(180deg,rgba(251,226,63,1) 0%,rgba(251,226,63,1) 46%,rgba(251,226,63,0) 100%) !important;
+}
+.lbt{
+  position: relative;
+  width:9.22rem;
+  height:5.01rem;
+  margin:1rem auto 0;
+  border-radius: 0.3rem;
+}
+.lbt_img{
+  width:9.23rem;
+  height:5.01rem;
+  border-radius: 0.3rem;
+}
+.jg_xx{
+  margin-top: 1.5rem;
+  padding: 0 0.42rem 0.21rem;
+  border-bottom: 0.1rem solid #f4f4f4;
+}
+.jg_title{
+  font-size:0.37rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:bold;
+  color:rgba(51,51,51,1);
+}
+.jg_pf{
+  margin-top: 0.08rem;
+  line-height:0.32rem;
+  display: flex;
+}
+.jg_pf img{
+  width:0.32rem;
+  height:0.32rem;
+}
+.jg_xx_bot{
+  margin-top: 0.19rem;
+  display: flex;
+  justify-content: space-between;
+  font-size:0.21rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:400;
+  line-height:0.27rem;
+  color:rgba(153,153,153,1);
+}
+.jg_xx_bot_je{
+  display: flex;
+}
+.jg_xx_bot_je div:nth-child(1){
+  font-size:0.32rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+margin-top: 0.07rem;
+}
+.jg_xx_bot_je div:nth-child(2){
+  font-size:0.53rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+}
+.sysh{
+  margin-top: 0.2rem;
+  padding: 0 0.4rem 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.01rem solid #f4f4f4;
+}
+.sysh_l_title{
+  display: flex;
+}
+.sysh_l_title img{
+  width: 0.32rem;
+  height: 0.32rem;
+}
+.sysh_l_title div{
+  font-size:0.27rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:bold;
+  line-height:0.35rem;
+  color:rgba(51,51,51,1);
+  margin-left: 0.2rem;
+}
+.sysh_l_name{
+  margin-top: 0.13rem;
+  font-size:0.37rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+}
+.sysh_l_pf{
+  display: flex;
+line-height:0.32rem;
+margin-top: 0.2rem;
+}
+.sysh_l_pf img{
+  width:0.32rem;
+height:0.32rem;
+}
+.sysh_r{
+  width: 20%;
+  border-left: 0.01rem solid #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+}
+.sysh_r img{
+  width: 0.69rem;
+  height: 0.69rem;
+}
+.jg_wz{
+  margin-top: 0.37rem;
+  padding-left: 0.32rem;
+  padding-right: 0.32rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.37rem;
+  border-bottom: 0.1rem solid #f4f4f4 !important;
+}
+.jg_wz_left{
+  display: flex;
+}
+.jg_wz_img{
+  width: 0.53rem;
+  height: 0.53rem;
+}
+.jg_wz_name{
+  width: 6rem;
+  margin-left: 0.19rem;
+  font-size:0.27rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:bold;
+  color:rgba(51,51,51,1);
+}
+.jg_wz_phone{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.jg_wz_phone img{
+  width:0.2rem;
+height:0.3rem;
+}
+.kcms{
+  margin-top: 0.29rem;
+  padding-left: 0.51rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 0.1rem solid #f4f4f4;
+}
+.kcms_title{
+  display: flex;
+}
+.kcms_title img{
+  width:0.29rem;
+  height:0.29rem;
+  vertical-align: middle;
+}
+.kcms_title div{
+  vertical-align: middle;
+  margin-left: 0.2rem;
+  font-size:0.27rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+}
+.kcms_box{
+  display: flex;
+  justify-content: space-between;
+  margin: 0.13rem 0.3rem 0;
+  padding-bottom: 0.2rem;
+  border-bottom: 0.01rem solid #f4f4f4;
+}
+
+.kcms_item div:nth-child(1){
+  font-size:0.21rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:400;
+  color:rgba(102,102,102,1);
+}
+.kcms_item div:nth-child(2){
+  margin-top: 0.2rem;
+  font-size:0.35rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(51,51,51,1);
+}
+.kcxq{
+  margin-top: 0.27rem;
+  padding: 0 0.48rem;
+}
+.kcxq_name{
+  font-size:0.37rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+}
+.kcxq_value{
+  margin-top: 0.27rem;
+  font-size:0.27rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+line-height:0.35rem;
+color:rgba(51,51,51,1);
+}
+.ktzp{
+  margin-top: 0.2rem;
+  padding: 0 0.45rem 0.2rem;
+  border-bottom: 0.1rem solid #f4f4f4;
+}
+.ktzp div{
+  font-size:0.27rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+}
+.ktzp img{
+  margin: 0.2rem auto;
+  width: 100%;
+  height:4.8rem;
+}
+.wydp{
+  padding: 0.32rem 0.35rem 0.32rem;
+  border-bottom: 0.1rem solid #f4f4f4;
+}
+.wydp_title{
+  display: flex;
+  justify-content: space-between;
+}
+.wydp_title div{
+  font-size:0.37rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:bold;
+  color:rgba(51,51,51,1);
+}
+.wydp_title img{
+  width:0.1rem;
+height:0.2rem;
+}
+.wydp_item{
+  display: flex;
+  margin-top: 0.32rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 0.02rem solid #f4f4f4;
+}
+.wydp_item_left{
+  width:1.55rem;
+height:1.55rem;
+border-radius: 50%;
+
+}
+.wydp_item_right{
+  margin-left: 0.24rem;
+  margin-top: 0.37rem;
+}
+.wydp_item_right_item{
+  display: flex;
+  justify-content: space-between;
+}
+.wydp_item_right_name{
+  font-size:0.32rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+}
+.wydp_item_right_pf{
+  display: flex;
+  line-height:0.31rem;
+}
+.wydp_item_right_pf img{
+  width:0.32rem;
+  height:0.31rem;
+}
+.wydp_item_right_sj{
+  margin-top: 0.25rem;
+  font-size:0.27rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(153,153,153,1);
+}
+.wydp_item_right_value{
+  margin-top: 0.24rem;
+  font-size:0.27rem;
+  line-height:0.35rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(51,51,51,1);
+}
+.wydp_item_right_ptup{
+  margin-top: 0.24rem;
+  display: flex;
+  justify-content: space-between;
+}
+.wydp_item_right_ptup img{
+  width:1.55rem;
+height:1.55rem;
+border-radius: 0.2rem;
+}
+
+.shxx{
+  padding: 0.32rem 0.35rem 0.32rem;
+  border-bottom: 0.1rem solid #f4f4f4;
+}
+.shxx_title{
+  font-size:0.32rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+}
+.shxx_item{
+  margin-top: 0.29rem;
+  display: flex;
+  align-items: center;
+}
+.shxx_item img{
+  width: 0.53rem;
+  height: 0.53rem;
+}
+.shxx_item div {
+  margin-left: 0.29rem;
+  font-size:0.32rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(51,51,51,1);
+}
+.jg_bottom{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height:1.39rem;
+  display: flex;
+  width: 100%;
+  background:rgba(255,255,255,1);
+}
+.jg_b_l{
+  padding: 0 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background:rgba(255,255,255,1);
+  box-shadow:0rem 0rem 0rem rgba(0,0,0,0.09);
+  border-radius:0.5rem 0rem 0rem 0rem;
+  width: 30%;
+}
+.jg_b_l_kf{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.jg_b_l_kf img{
+  width:0.54rem;
+  height:0.48rem;
+}
+.jg_b_l_kf div{
+  margin-top: 0.1rem;
+  font-size:0.21rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(51,51,51,1);
+}
+.jg_b_r{
+  width: 70%;
+  display: flex;
+}
+.jg_b_r div:nth-child(1){
+  width: 50%;
+  background:rgba(255,226,7,1);
+border-radius:0.5rem 0rem 0rem 0rem;
+font-size:0.37rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.jg_b_r div:nth-child(2){
+  width: 50%;
+  background:rgba(252,117,1,1);
+border-radius:0rem 0.5rem 0rem 0rem;
+font-size:0.37rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+  color:rgba(51,51,51,1);
+  display: flex;
+justify-content: center;
+align-items: center;
+}
+.jg_b_l_fx div{
+  margin-top: 0.1rem;
+  font-size:0.21rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(51,51,51,1);
+}
+.jg_b_l_fx img{
+  width:0.56rem;
+height:0.56rem;
+}
+.kcdp{
+  position: fixed;
+  right: 0.32rem;
+  bottom: 1.58rem;
+  width:1.2rem;
+height:1.2rem;
+background:rgba(255,226,7,1);
+box-shadow: 0px 3px 12px rgba(0,0,0,0.16);
+border-radius:50%;
+font-size:0.37rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+display: flex;
+justify-content: center;
+align-items: center;
+}

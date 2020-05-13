@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/cui.css">
+    <link rel="stylesheet" href="../css/swiper-3.3.1.min.css">
+    <link rel="stylesheet" href="../css/jg/jgjskclist.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <title>淘乐课</title>
+</head>
+<body>
+    <div id="app">
+        <div class="map_top bg">
+            <img src="../img/index/down-icon@2x.png" alt="" @click="Back()">
+            <div>{{top_value}}</div>
+        </div>
+        <!-- input框 -->
+        <div class="top_input">
+            <!-- <div class="top_input-left" v-cloak >{{this.searchName}}</div> -->
+            <input class="search"  v-cloak :placeholder="zid_value" v-model="sssj"></input>
+            <div class="loupe" @click="sosuo()"> <img class="loupe_image" src="../img/index/Icon-Search@2x.png"></img></div>
+        </div>
+        <!-- 筛选 -->
+        <div class="saixuan">
+            <div class="saixuan_item" @click="sx(0)">
+                <div>{{sqsj}}</div>
+                <img src="../img/zhaohuodong/zhaohuodng-xiala@2x.png" alt="">
+            </div>
+            <div class="saixuan_item" @click="sx(1)">
+                <div>{{fl_name}}</div>
+                <img src="../img/zhaohuodong/zhaohuodng-xiala@2x.png" alt="">
+            </div>
+            <div class="saixuan_item" @click="sx(2)">
+                <div>{{znfl[znIndex]}}</div>
+                <img src="../img/zhaohuodong/zhaohuodng-xiala@2x.png" alt="">
+            </div>
+            <div class="saixuan_item" @click="sx(3)">
+                <div>筛选</div>
+                <img src="../img/zhaohuodong/zhaohuodng-xiala@2x.png" alt="">
+            </div>
+            <!-- 位置 -->
+            <div class="sx_wz" v-if="sxindex">
+                <div class="sx_wz_title">
+                    <div>区域</div>
+                    <div>商圈</div>
+                </div>
+                <div class="sx_wz_item">
+                    <div class="sx_wz_l">
+                        <!-- class="sx_wz_l_active" -->
+                        <div v-for="item in areaLise" :class="[rowActive == item.id?'sx_wz_l_active':'']" @click="rowClick(item.id,item.name)">{{item.name}}</div>
+                    </div>
+                    <div class="sx_wz_r">
+                        <div v-for="item in sqlist" @click="citycloss(item)">{{item}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 分类 -->
+            <div class="sx_fl" v-if="sxindex1">
+                <div class="sx_fl_l" >
+                    <div v-for="(item,index) in fllists" :key="index" :class="[flActive == item.hy_id ? 'sx_fl_l_active':'']" @click="hyzfl(item.hy_id,item.hyclassify)">{{item.hyclassify}}</div>
+                </div>
+                <div class="sx_fl_r">
+                    <div v-for="item in flzlist" @click="hyzfl_sj(item.hyz_id)">{{item.hyzclassify}}</div>
+                    
+                </div>
+            </div>
+            <!-- 智能排序 -->
+            <div class="sx_px" v-if="sxindex2">
+                <!-- class="sx_px_active" -->
+                <div v-for="(item,index) in znfl" :class="[znIndex == index?'sx_px_active':'']" @click="znpx(index)">{{item}}</div>
+            
+            </div>
+            <!-- 筛选 -->
+            <div class="sx_sx" v-if="sxindex3">
+                <div class="sx_sx_item" v-if="zid == 1">
+                    <div v-for="(item,index) in jgnl" :class="[nl_index == index?'nl_active':'']" @click="nlClick(index)">{{item.name}}</div>
+                </div>
+                <div class="sx_sx_item" v-if="zid == 3">
+                    <div v-for="(item,index) in nl" :class="[nl_index == index?'nl_active':'']" @click="nlClick(index)">{{item.name}}</div>
+                </div>
+                <div class="sx_sx_item" v-if="zid == 2">
+                    <div v-for="(item,index) in kcnl" :class="[nl_index == index?'nl_active':'']" @click="nlClick(index)">{{item.name}}</div>
+                </div>
+                <div class="sx_sx_bottom">
+                    <div @click="cznl()">重置</div>
+                    <div @click="">确定</div>
+                </div>
+            </div>
+        </div>
+        <!-- 机构 -->
+        <div class="cnxh_item" v-for="item in jglists" v-if="zid == 1" @click="jgxq(item.jg_id)">
+            <img class="cnxh_item_img" :src="item.jg_logo"  alt="">
+            <div class="cnxh_item_right">
+                <div class="cnxh_item_right_1">
+                    <div  v-cloak>{{item.jg_name}}</div>
+                    <img src="../img/index/jglist/leibiao-renzhen@2x.png" alt="">
+                </div>
+                <div class="cnxh_item_right_2">
+                    <img v-for="item in item.score"  src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+                    <img v-for="item in 5 - item.score" src="../img/index/jsxq/icon/pingjiayemian-xingjiweixuanhzong@2x.png" alt="">
+                </div>
+                <div class="cnxh_item_right_3">
+                    <div class="cnxh_item_right_3_l">
+                        <div v-cloak>音乐 </div>
+                        <div v-cloak>{{item.jg_area}}</div>
+                    </div>
+                    <div class="cnxh_item_right_3_r" v-if="item.jl != 1000000">{{item.jl}}km</div>
+                </div>
+            </div>
+        </div>
+        <!-- 教师 -->
+        <div class="cnxh_item" v-for="(item,index) in jglists" v-if="zid == 3" >
+            <img class="cnxh_item_img js_logo" :src="item.js_logo" alt="">
+            <div class="cnxh_item_right">
+                <div class="cnxh_item_right_1">
+                    <div  v-cloak>{{ item.js_name }}</div>
+                    <!-- <img src="./img/index/jglist/leibiao-renzhen@2x.png" alt=""> -->
+                </div>
+                <div class="cnxh_item_right_2">
+                    <img v-for="item in item.score" src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+                    <img v-for="item in 5 - item.score" src="../img/index/jsxq/icon/pingjiayemian-xingjiweixuanhzong@2x.png" alt="">
+                </div>
+                <div class="cnxh_item_right_3">
+                    <div  v-cloak>{{item.js_sex}}   {{item.js_jl}}年教龄  {{item.js_zc}}</div>
+                    <div v-if="item.jl != 1000000" v-cloak>{{item.jl}}km</div>
+                </div>
+            </div>
+        </div>
+        <!-- 课程 -->
+        <div class="cnxh_item" v-for="(item,index) in jglists" v-if="zid == 2">
+            <img class="cnxh_item_img " :src="item.kc_logo" alt="">
+            <div class="cnxh_item_right">
+                <div class="cnxh_item_right_1">
+                    <div v-cloak>{{ item.kc_name }}</div>
+                    <!-- <img src="./img/index/jglist/leibiao-renzhen@2x.png" alt=""> -->
+                </div>
+                <div class="cnxh_item_right_2">
+                    <img v-for="item in item.score" src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+                    <img v-for="item in 5 - item.score" src="../img/index/jsxq/icon/pingjiayemian-xingjiweixuanhzong@2x.png" alt="">
+                </div>
+                <div class="cnxh_item_right_3">
+                    <div v-cloak>美术   {{item.kc_area}}</div>
+                    <div v-cloak v-if="item.jl != 1000000">{{item.jl}}km</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/swiper-3.3.1.min.js"></script>
+<script src="../js/cui.js"></script>
+<script src="../js/flexible_css.js"></script>
+<script src="../js/flexible.js"></script>
+<script src="../utils/util.js"></script>
+<script src="../js/vue.js"></script>
+<script>
+    window.onload = function () {
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    // 筛选下来
+                    sxindex:0,
+                    sxindex1:0,
+                    sxindex2:0,
+                    sxindex3:0,
+                    fl:null,// 行业分类
+                    fl_name:null,// 分类名字
+                    fllists:null,
+                    ys:1,
+                    latitude:null,
+                    longitude:null,
+                    city:null,
+                    jglists:null,
+                    areaLise: [
+                        // { id: 0, name: '热门商区' },
+                        { id: 0, name: '未央区' },
+                        { id: 1, name: '碑林区' },
+                        { id: 2, name: '新城区' },
+                        { id: 3, name: '雁塔区' },
+                        { id: 4, name: '高新区' },
+                        { id: 5, name: '灞桥区' },
+                        { id: 6, name: '长安区' },
+                        { id: 7, name: '莲湖区' },
+                        { id: 8, name: '临潼区' },
+                        { id: 9, name: '阎良区' },
+                        { id: 10, name: '鄠邑区' },
+                        { id: 11, name: '高陵区' },
+                        { id: 12, name: '蓝田县' },
+                        { id: 13, name: '周至县' },
+                    ],
+                    rowActive:0,
+                    flActive:0,
+                    sqlist:null,
+                    sqsj:'位置',
+                    sqsjvalue:-1,
+                    area:-1,
+                    flzlist:null,
+                    hyzflid:0,
+                    znid:1,
+                    znfl:['智能排序','距离排序','人气优先','好评优先','低价优先','高价优先'],
+                    znIndex:0,
+                    sssj:'',
+                    ymgd:null, // 页面高度
+                    zid:null,// 区分当前属于机构、教师、课程
+                    zid_value:'',
+                    top_value:'',// 顶部
+                    nl: [
+                        { id: 1, name: '男教师' }, 
+                        { id: 2, name: '女教师' }, 
+                        { id: 3, name: '工作室' },
+                        { id: 4, name: '一线教师' },
+                        { id: 5, name: '试听' },
+                        { id: 6, name: '兼职教师' },
+                        { id: 7, name: '家教' },
+                        { id: 8, name: '幼儿园' },
+                        { id: 9, name: '小学' },
+                        { id: 10, name: '初中' }
+                    ],
+                    kcnl: [
+                        { id: 1, name: '试听' },
+                        { id: 2, name: '团购' },
+                        { id: 3, name: '优惠' },
+                        { id: 4, name: '1对1' },
+                        { id: 5, name: '小班' },
+                        { id: 6, name: '外教' },
+                        { id: 7, name: '主题活动' },
+                        { id: 8, name: '免费停车' },
+                        { id: 9, name: '日班' },
+                        { id: 10, name: '晚班' },
+                        { id: 11, name: '周末班' },
+                    ],
+                    jgnl: [
+                        { id: 1, name: '试听' },
+                        { id: 2, name: '团购' }, 
+                        { id: 3, name: '优惠' }, 
+                        { id: 4, name: '1对1' }, 
+                        { id: 5, name: '小班' },
+                        { id: 6, name: '大课' },
+                        { id: 7, name: '外教' },
+                        { id: 8, name: '零基础' },
+                        { id: 9, name: '周末班' },
+                        { id: 10, name: '晚班' },
+                        { id: 11, name: '幼儿园' },
+                        { id: 12, name: '小学' },
+                        { id: 13, name: '初中' },
+                    ],
+                    nl_index:null,
+                },
+                created:function(){
+                    let _this = this
+                    //获取行业分类
+                    _this.hyfl()
+                    
+                    _this.fl = JSON.parse(sessionStorage.getItem('hd_id')) || 0
+                    _this.zid =  JSON.parse(sessionStorage.getItem('zid'))
+                    _this.sssj = JSON.parse(sessionStorage.getItem('sssj')) || ''
+                    _this.fl_name =  JSON.parse(sessionStorage.getItem('fl_name')) || '分类'
+                    _this.latitude = JSON.parse(sessionStorage.getItem('latitude'))
+                    _this.longitude = JSON.parse(sessionStorage.getItem('longitude'))
+                    _this.city = JSON.parse(sessionStorage.getItem('city'))
+                    if(_this.zid == 1){
+                        _this.zid_value = '搜索机构名称'
+                        _this.top_value = '机构列表'
+                    }else if(_this.zid == 2){
+                        _this.zid_value = '搜索课程名称'
+                        _this.top_value = '课程列表'
+                    }else if(_this.zid == 3){
+                        _this.zid_value = '搜索教师名称'
+                        _this.top_value = '教师列表'
+                    }
+                    // 获取机构数据
+                    _this.jglist()
+                },
+                mounted: function (e) {
+                  var _this = this;
+                  // 数据预加载
+                    _this.scroll()
+                  },
+                methods:{
+                    cznl(){ // 重置
+                        this.nl_index = null
+                    },
+                    nlClick(index){ // 筛选选中
+                        this.nl_index = index
+                    },
+                    jgxq(jgid){
+                        // console.log(jgid)
+                        window.sessionStorage.setItem('jgid', JSON.stringify(jgid))
+                        window.location= 'jgxq.html'
+                    },
+                    scroll(){// 判断页面是否滚动到底部
+                        let _this = this
+                        window.onscroll = function(){
+                            //变量scrollTop是滚动条滚动时，距离顶部的距离
+                            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop; 
+                            
+                            //变量windowHeight是可视区的高度 
+                            var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+
+                            //变量scrollHeight是滚动条的总高度
+                            var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight; 
+                            _this.ymgd = scrollHeight
+                            // console.log(scrollTop)
+                            // console.log(scrollHeight)
+                            // console.log(scrollTop)
+
+                            //滚动条到底部的条件
+                            if (scrollTop + windowHeight >= _this.ymgd) {        
+                                //已滚动底部
+                                // console.log('滚动到底部')
+                                // 触底事件
+                                _this.information_Load();
+                            }
+                        }
+                    },
+                    information_Load(){ // 触底加载新数据
+                        let _this = this
+                        // 页数加1
+                        _this.ys = _this.ys + 1
+                        $.ajax({
+                            url: 'https://tp.xiniuwangluo.cn/tlkxcx/getjglist.do',
+                            type: 'post',
+                            data: {"zhy_id": _this.zid, "hy_id": _this.fl, "ys": _this.ys, "hyz_id": _this.hyzflid, "znpx": _this.znid, "sq": _this.sqsjvalue, "value": _this.sssj || '-1', "n": _this.longitude, "e": _this.latitude, "jg_area": _this.area},
+                            header: {
+                                'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                            },
+                            dataType:'json',
+                            cache: false,
+                            success: function (ret) {
+                                // console.log('预加载机构数据',ret)
+                                if(ret.return_code === '0003'){
+                                    cui.toast({title: '没有更多数据', location: 'middle', showtime: 2000})
+                                    return
+                                }
+                                if(_this.zid == 1){
+                                    let xjglist = []
+                                    ret.jglist.map(item => {
+                                        let jd = item.n
+                                        let wd = item.e
+                                        if (jd === '' || wd === '') {
+                                            item.jl = 1000000
+                                            xjglist.push(item)
+                                        }
+                                        if (jd !== '' || wd !== '') {
+                                            function rad(d){
+                                                return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                            }
+                                            // 计算距离
+                                            var radLat1 = rad(_this.latitude);
+                                            var radLat2 = rad(jd);
+                                            var a = radLat1 - radLat2;
+                                            var b = rad(_this.longitude) - rad(wd);
+                                            var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                            s = s * 6378.137;
+                                            // EARTH_RADIUS;
+                                            s = Math.round(s * 10000) / 10000;
+                                            let ss = s.toFixed(1)
+                                            let obj2 = {}
+                                            obj2 = Object.assign({}, item, { jl: parseFloat(ss) })
+                                            xjglist.push(obj2)
+                                        }
+                                    })
+                                    let xxjg = sortarr(xjglist)
+                                    // console.log('排序后的jg数组', xxjg)
+                                    xxjg.map((item, index) => {
+                                        if (item.jg_logo === '' || item.jg_logo === '-1') {
+                                        return item.jg_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                        }
+                                        return item.jg_logo = 'https://tp.xiniuwangluo.cn' + item.jg_logo
+                                    })
+                                    xxjg.map(item =>{
+                                        if(item.jl.toString().length == 1){
+                                            return item.jl = item.jl.toString() + '.0'
+                                        }
+                                    })
+                                    _this.jglists = _this.jglists.concat(xxjg)
+                                }else if(_this.zid == 3){
+                                    let xjglist = []
+                                    ret.jslist.map(item => {
+                                        let jd = item.n
+                                        let wd = item.e
+                                        if (jd === '' || wd === '') {
+                                            item.jl = 1000000
+                                            xjglist.push(item)
+                                        }
+                                        if (jd !== '' || wd !== '') {
+                                            function rad(d){
+                                                return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                            }
+                                            // 计算距离
+                                            var radLat1 = rad(_this.latitude);
+                                            var radLat2 = rad(jd);
+                                            var a = radLat1 - radLat2;
+                                            var b = rad(_this.longitude) - rad(wd);
+                                            var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                            s = s * 6378.137;
+                                            // EARTH_RADIUS;
+                                            s = Math.round(s * 10000) / 10000;
+                                            let ss = s.toFixed(1)
+                                            let obj2 = {}
+                                            obj2 = Object.assign({}, item, { jl: parseFloat(ss) })
+                                            xjglist.push(obj2)
+                                        }
+                                    })
+                                    let xxjg = sortarr(xjglist)
+                                    // console.log('排序后的jg数组', xxjg)
+                                    xxjg.map((item, index) => {
+                                        if (item.js_logo === '' || item.js_logo === '-1') {
+                                        return item.js_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                        }
+                                        return item.js_logo = 'https://tp.xiniuwangluo.cn' + item.js_logo
+                                    })
+                                    xxjg.map(item =>{
+                                        if(item.jl.toString().length == 1){
+                                            return item.jl = item.jl.toString() + '.0'
+                                        }
+                                    })
+                                    _this.jglists = _this.jglists.concat(xxjg)
+                                }else if(_this.zid == 2){
+                                    let xjglist = []
+                                    ret.kclist.map(item => {
+                                        let jd = item.n
+                                        let wd = item.e
+                                        if (jd === '' || wd === '') {
+                                            item.jl = 1000000
+                                            xjglist.push(item)
+                                        }
+                                        if (jd !== '' || wd !== '') {
+                                            function rad(d){
+                                                return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                            }
+                                            // 计算距离
+                                            var radLat1 = rad(_this.latitude);
+                                            var radLat2 = rad(jd);
+                                            var a = radLat1 - radLat2;
+                                            var b = rad(_this.longitude) - rad(wd);
+                                            var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                            s = s * 6378.137;
+                                            // EARTH_RADIUS;
+                                            s = Math.round(s * 10000) / 10000;
+                                            let ss = s.toFixed(1)
+                                            let obj2 = {}
+                                            obj2 = Object.assign({}, item, { jl: parseFloat(ss) })
+                                            xjglist.push(obj2)
+                                        }
+                                    })
+                                    let xxjg = sortarr(xjglist)
+                                    // console.log('排序后的jg数组', xxjg)
+                                    xxjg.map((item, index) => {
+                                        if (item.kc_logo === '' || item.kc_logo === '-1') {
+                                        return item.kc_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                        }
+                                        return item.kc_logo = 'https://tp.xiniuwangluo.cn' + item.kc_logo
+                                    })
+                                    xxjg.map(item =>{
+                                        if(item.jl.toString().length == 1){
+                                            return item.jl = item.jl.toString() + '.0'
+                                        }
+                                    })
+                                    _this.jglists = _this.jglists.concat(xxjg)
+                                }
+                            },
+                            error: function (ret, err) {
+                                cui.hideload();
+                            }
+                        });
+                    },
+                    sosuo(){ // 根据用户搜索获取最新机构数据
+                        if(this.sssj.trim() == ''){
+                            cui.toast({title: '请输入搜索内容', location: 'middle', showtime: 2000})
+                            return
+                        }
+                        this.jglist()
+                    },
+                    znpx(index){ // 根据智能排序的方法进行 获取数据
+                        this.znIndex = index
+                        this.znid = index +1
+                        this.jglist()
+                        this.sx(2)
+                    },
+                    hyzfl_sj(id){ // 根据行业分类 和 行业分类子id 获取机构数据
+                        this.hyzflid = id
+                        this.jglist()
+                        this.sx(1)
+                    },
+                    hyzfl(index,name){ // 获取子分类数据
+                        this.fl = index
+                        this.flActive = index
+                        this.fl_name = name
+                        let _this = this
+                        $.ajax({
+                            url: 'https://tp.xiniuwangluo.cn/tlk/gethyzfllist.do',
+                            type: 'post',
+                            data: {"hy_id": index},
+                            header: {
+                                'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                            },
+                            dataType:'json',
+                            cache: false,
+                            success: function (ret) {
+                                // console.log('行业子分类',ret.flzlist)
+                                _this.flzlist = ret.flzlist
+                            },
+                            error: function (ret, err) {
+                                cui.hideload();
+                            }
+                        });
+                    },
+                    citycloss(name){ // 选择商圈数据，并关闭
+                        this.sqsj = name
+                        this.sqsjvalue = name
+                        this.jglist()
+                        this.sx(0)
+                    },
+                    rowClick(id,name){ // 获取商圈数据
+                        this.rowActive = id
+                        this.area = name
+                        let _this = this
+                        $.ajax({
+                            url: 'https://tp.xiniuwangluo.cn/tlk/getsqlist.do',
+                            type: 'post',
+                            data: {"area": name},
+                            header: {
+                                'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                            },
+                            dataType:'json',
+                            cache: false,
+                            success: function (ret) {
+                                // console.log('商圈数据',ret.sqlist)
+                                _this.sqlist = ret.sqlist
+                            },
+                            error: function (ret, err) {
+                                cui.hideload();
+                            }
+                        });
+                        
+                    },
+                    hyfl(){ // 获取行业分类数据
+                    let _this = this
+                        $.ajax({
+                            url: 'https://tp.xiniuwangluo.cn/tlk/getqbfllist.do',
+                            type: 'post',
+                            data: {},
+                            header: {
+                                'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                            },
+                            dataType:'json',
+                            cache: false,
+                            success: function (ret) {
+                                // console.log('行业分类',ret.fllist)
+                                _this.fllists = ret.fllist
+                            },
+                            error: function (ret, err) {
+                                cui.hideload();
+                            }
+                        });
+                    },
+                    jglist(){ // 获取机构数据
+                    let _this = this
+                        window.sessionStorage.setItem('sssj', JSON.stringify(this.sssj))
+                        _this.ys = 1
+                        $.ajax({
+                            url: 'https://tp.xiniuwangluo.cn/tlkxcx/getjglist.do',
+                            type: 'post',
+                            data: {"zhy_id": _this.zid, "hy_id": _this.fl, "ys": _this.ys, "hyz_id": _this.hyzflid, "znpx": _this.znid, "sq": _this.sqsjvalue, "value": _this.sssj || '-1', "n": _this.longitude, "e": _this.latitude, "jg_area": _this.area},
+                            header: {
+                                'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                            },
+                            dataType:'json',
+                            cache: false,
+                            success: function (ret) {
+                                if(ret.return_code === '0003'){
+                                    cui.toast({title: '没有更多数据', location: 'middle', showtime: 2000})
+                                    _this.jglists =[]
+                                    return
+                                }
+                                // console.log('数据',ret)
+                                if(_this.zid == 1){
+                                    let xjglist = []
+                                    ret.jglist.map(item => {
+                                        let jd = item.n
+                                        let wd = item.e
+                                        if (jd === '' || wd === '') {
+                                            item.jl = 1000000
+                                            xjglist.push(item)
+                                        }
+                                        if (jd !== '' || wd !== '') {
+                                            function rad(d){
+                                                return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                            }
+                                            // 计算距离
+                                            var radLat1 = rad(_this.latitude);
+                                            var radLat2 = rad(jd);
+                                            var a = radLat1 - radLat2;
+                                            var b = rad(_this.longitude) - rad(wd);
+                                            var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                            s = s * 6378.137;
+                                            // EARTH_RADIUS;
+                                            s = Math.round(s * 10000) / 10000;
+                                            let ss = s.toFixed(1)
+                                            let obj2 = {}
+                                            obj2 = Object.assign({}, item, { jl: parseFloat(ss) })
+                                            xjglist.push(obj2)
+                                        }
+                                    })
+                                    let xxjg = sortarr(xjglist)
+                                    // console.log('排序后的jg数组', xxjg)
+                                    xxjg.map((item, index) => {
+                                        if (item.jg_logo === '' || item.jg_logo === '-1') {
+                                        return item.jg_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                        }
+                                        return item.jg_logo = 'https://tp.xiniuwangluo.cn' + item.jg_logo
+                                    })
+                                    xxjg.map(item =>{
+                                        if(item.jl.toString().length == 1){
+                                            return item.jl = item.jl.toString() + '.0'
+                                        }
+                                    })
+                                    _this.jglists = xxjg
+                                }else if(_this.zid == 3){
+                                    let xjglist = []
+                                    ret.jslist.map(item => {
+                                        let jd = item.n
+                                        let wd = item.e
+                                        if (jd === '' || wd === '') {
+                                            item.jl = 1000000
+                                            xjglist.push(item)
+                                        }
+                                        if (jd !== '' || wd !== '') {
+                                            function rad(d){
+                                                return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                            }
+                                            // 计算距离
+                                            var radLat1 = rad(_this.latitude);
+                                            var radLat2 = rad(jd);
+                                            var a = radLat1 - radLat2;
+                                            var b = rad(_this.longitude) - rad(wd);
+                                            var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                            s = s * 6378.137;
+                                            // EARTH_RADIUS;
+                                            s = Math.round(s * 10000) / 10000;
+                                            let ss = s.toFixed(1)
+                                            let obj2 = {}
+                                            obj2 = Object.assign({}, item, { jl: parseFloat(ss) })
+                                            xjglist.push(obj2)
+                                        }
+                                    })
+                                    let xxjg = sortarr(xjglist)
+                                    // console.log('排序后的jg数组', xxjg)
+                                    xxjg.map((item, index) => {
+                                        if (item.js_logo === '' || item.js_logo === '-1') {
+                                        return item.js_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                        }
+                                        return item.js_logo = 'https://tp.xiniuwangluo.cn' + item.js_logo
+                                    })
+                                    xxjg.map(item =>{
+                                        if(item.jl.toString().length == 1){
+                                            return item.jl = item.jl.toString() + '.0'
+                                        }
+                                    })
+                                    _this.jglists = xxjg
+                                }else if(_this.zid == 2){
+                                    let xjglist = []
+                                    ret.kclist.map(item => {
+                                        let jd = item.n
+                                        let wd = item.e
+                                        if (jd === '' || wd === '') {
+                                            item.jl = 1000000
+                                            xjglist.push(item)
+                                        }
+                                        if (jd !== '' || wd !== '') {
+                                            function rad(d){
+                                                return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                            }
+                                            // 计算距离
+                                            var radLat1 = rad(_this.latitude);
+                                            var radLat2 = rad(jd);
+                                            var a = radLat1 - radLat2;
+                                            var b = rad(_this.longitude) - rad(wd);
+                                            var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                            s = s * 6378.137;
+                                            // EARTH_RADIUS;
+                                            s = Math.round(s * 10000) / 10000;
+                                            let ss = s.toFixed(1)
+                                            let obj2 = {}
+                                            obj2 = Object.assign({}, item, { jl: parseFloat(ss) })
+                                            xjglist.push(obj2)
+                                        }
+                                    })
+                                    let xxjg = sortarr(xjglist)
+                                    // console.log('排序后的jg数组', xxjg)
+                                    xxjg.map((item, index) => {
+                                        if (item.kc_logo === '' || item.kc_logo === '-1') {
+                                        return item.kc_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                        }
+                                        return item.kc_logo = 'https://tp.xiniuwangluo.cn' + item.kc_logo
+                                    })
+                                    xxjg.map(item =>{
+                                        if(item.jl.toString().length == 1){
+                                            return item.jl = item.jl.toString() + '.0'
+                                        }
+                                    })
+                                    _this.jglists = xxjg
+                                }
+                                
+                            },
+                            error: function (ret, err) {
+                                cui.hideload();
+                            }
+                        });
+                    },
+                    getQueryVariable(variable){
+                        let query = window.location.search.substring(1);
+                        let vars = query.split("&");
+                        for (var i=0;i<vars.length;i++) {
+                                let pair = vars[i].split("=");
+                                if(pair[0] == variable){return pair[1];}
+                        }
+                        return(false);
+                    },
+                    sx(index){ // 筛选条件
+                        if(index == 0){
+                            this.sxindex1 = false
+                            this.sxindex2 = false
+                            this.sxindex3 = false
+                            this.sxindex = !this.sxindex
+                        }else if(index ==1){
+                            this.sxindex = false
+                            this.sxindex2 = false
+                            this.sxindex3 = false
+                            this.sxindex1 = !this.sxindex1
+                        }else if(index ==2){
+                            this.sxindex = false
+                            this.sxindex1 = false
+                            this.sxindex3 = false
+                            this.sxindex2 = !this.sxindex2
+                        }else if(index ==3){
+                            this.sxindex = false
+                            this.sxindex1 = false
+                            this.sxindex2 = false
+
+                            this.sxindex3 = !this.sxindex3
+                        }
+                    },
+                    Back(){
+                        window.location='../index.html'
+                    },
+                }
+            })
+        }
+</script>
+</html>

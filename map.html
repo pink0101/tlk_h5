@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/cui.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/map/map.css">
+  <title>淘乐课</title>
+</head>
+<body>
+  <div id="app">
+    <div class="map_box">
+      <div class="map_top">
+        <img src="img/index/down-icon@2x.png" alt="" @click="Back()">
+        <div>选择城市</div>
+      </div>
+      <div class="map_item map_item_active">
+        <div>西安市</div>
+        <div>GPS定位</div>
+      </div>
+      <div class="map_item" v-for="item in operation" @click="qh_city(item.text)"  v-cloak>{{item.text}}</div>
+    </div>
+  </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/cui.js"></script>
+<script src="js/flexible_css.js"></script>
+<script src="js/flexible.js"></script>
+<script src="js/vue.js"></script>
+<script type="text/javascript"> 
+  window.onload = function () {
+      var vm = new Vue({
+          el: "#app",
+          data: {
+            operation: [{
+                id: 0,
+                text: "雁塔区",
+                isSelect: false
+              }, {
+                id: 1,
+                text: "碑林区",
+                isSelect: false
+              }, {
+                id: 2,
+                text: "未央区",
+                isSelect: false
+              }, {
+                id: 3,
+                text: "鄠邑区",
+                isSelect: false
+              }, {
+                id: 4,
+                text: "灞桥区",
+                isSelect: false
+              }, {
+                id: 5,
+                text: "高陵区",
+                isSelect: false
+              }, {
+                id: 6,
+                text: "临潼区",
+                isSelect: false
+              }, {
+                id: 7,
+                text: "莲湖区",
+                isSelect: false
+              }, {
+                id: 8,
+                text: "阎良区",
+                isSelect: false
+              }, {
+                id: 9,
+                text: "长安区",
+                isSelect: false
+              }, {
+                id: 10,
+                text: "新城区",
+                isSelect: false
+              }, {
+                id: 11,
+                text: "周至县",
+                isSelect: false
+              },{
+                id: 12,
+                text: "蓝田县",
+                isSelect: false
+              }],
+          },
+          created:function(){
+          },
+          methods:{
+            qh_city(city){
+              console.log(city)
+              // 将区域信息存储本地
+              window.sessionStorage.setItem('city', JSON.stringify(city))
+              window.location='index.html'
+            },
+            Back(){
+              window.location='index.html'
+            }
+          }
+      })
+  }
+</script>
+</html>

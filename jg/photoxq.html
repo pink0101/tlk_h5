@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/cui.css">
+    <link rel="stylesheet" href="../css/swiper-3.3.1.min.css">
+    <link rel="stylesheet" href="../css/jg/photoxq.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <title>图片详情</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+          <div class="map_top">
+            <img src="../img/index/down-icon@2x.png" alt="" @click="Back()">
+            <div>图片详情</div>
+          </div>
+          <!-- title -->
+          <div class="photo_title">
+              <div :class="[title_index == 0 ? 'photo_title_active':'']" @click="title_qh(0)">整体({{zt}})</div>
+              <div :class="[title_index == 1 ? 'photo_title_active':'']" @click="title_qh(1)">局部({{jb}})</div>
+          </div>
+          <!-- 轮播 -->
+          <div>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                      <div class="lbt_item">
+                        <img v-for="(item,index) in firstList" :src="'https://tp.xiniuwangluo.cn' + item" alt="" @click="privePhoto(index)">
+                      </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="lbt_item">
+                        <img v-for="(item,index) in secondList" :src="'https://tp.xiniuwangluo.cn' + item" alt="" @click="privePhoto(index)">
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <!-- 图片预览 -->
+          <div class="photo_prive"  style="display: none;"  @click="fousPhoto()">
+            <div class="swiper-container1">
+              <div class="swiper-wrapper" style="display: flex;align-items: center;">
+                <div class="swiper-slide" v-for="item in firstList" v-if="title_index == 0">
+                  <img class="prive_img" :src="'https://tp.xiniuwangluo.cn' + item" alt="prive" >
+                </div>
+                <div class="swiper-slide" v-for="item in secondList" v-if="title_index == 1">
+                    <img class="prive_img" :src="'https://tp.xiniuwangluo.cn' + item" alt="prive" >
+                  </div>
+              </div>
+            </div>
+            <div class="swiper-pagination" style="color: #ffffff;"></div>
+          </div>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/swiper-3.3.1.min.js"></script>
+<script src="../js/cui.js"></script>
+<script src="../js/flexible_css.js"></script>
+<script src="../js/flexible.js"></script>
+<script src="../utils/util.js"></script>
+<script src="../js/vue.js"></script>
+<script>
+    window.onload = function () {
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    lbt:[
+                        'https://tp.xiniuwangluo.cn/tlk/images/morentouxiangd@2x.png'
+                    ],
+                    zt: null,
+                    jb: null,
+                    firstList: null,
+                    secondList: null,
+                    title_index:0,
+                },
+                created:function(){
+                  let _this= this
+                  _this.jgid = JSON.parse(sessionStorage.getItem('jgid'))
+                  // 获取机构详情
+                  _this.jgxq()
+                },
+                mounted: function (e) {
+                  var _this = this;
+                  // 初始化轮播图
+                  _this.initBanner();
+                  _this.initBanner1();  
+                  },
+                methods:{
+                    title_qh(index){
+                        this.title_index = index
+                        // 切换三级标题
+                        this.initBanner(index)
+                    },
+                  fousPhoto(){ // 关闭预览图片
+                    let _this = this
+                    $('.photo_prive').css('display','none')
+                  },
+                  privePhoto(index){ // 预览图片
+                    let _this = this
+                    _this.prive_index = index
+                    $('.photo_prive').css('display','')
+                    $('.swiper-slide').css('width','100%')
+                  },
+                  jgxq(){ // 获取机构详情
+                      let _this = this
+                      Api.doPost('/tlk/getjgxq.do',{"jg_id":_this.jgid},function(res){
+                        console.log(res)
+                        for (let i = 0; i < res.htjglist.length; i++){
+                            //整体照片
+                            res.htjglist[i].jg_zttp = res.htjglist[i].jg_zttp.split(",");
+                            res.htjglist[i].jg_zttp.pop();
+                            let ztnum = res.htjglist[i].jg_zttp.length;
+                            //局部照片
+                            res.htjglist[i].jg_jbtp = res.htjglist[i].jg_jbtp.split(",");
+                            res.htjglist[i].jg_jbtp.pop();
+                            let jbnum = res.htjglist[i].jg_jbtp.length;
+
+                            _this.zt = ztnum,
+                            _this.jb = jbnum,
+                            _this.firstList = res.htjglist[i].jg_zttp,
+                            _this.secondList = res.htjglist[i].jg_jbtp
+                        }
+                      })
+                      
+                  },
+                  Back(){
+                    window.history.go(-1)
+                  },
+                  initBanner:function(index){ // 初始化轮播图
+                        let _this = this
+                        var mySwiper = new Swiper('.swiper-container', {
+                            // autoplay: 3000,//可选选项，自动滑动
+                            speed:500,
+                            pagination : '.swiper-pagination',
+                            onSlideChangeStart: function(swiper){
+                                // console.log(swiper.activeIndex)
+                                _this.title_index = swiper.activeIndex
+                            }
+                        })
+                        if(index == 0){
+                            $('.swiper-container .swiper-wrapper').css({'transform':'translate3d(0px, 0px, 0px)','transition-duration':'500ms'})
+                        }
+                        mySwiper.slideTo(index, 500, false);
+                  },
+                  initBanner1:function(){ // 初始化轮播图
+                        let _this = this
+                        var mySwiper = new Swiper('.swiper-container1', {
+                            // autoplay: 3000,//可选选项，自动滑动
+                            speed:500,
+                            pagination : '.swiper-pagination',
+                            paginationType : 'fraction',
+                            observeParents: true,
+                            observer:true,
+                            initialSlide:_this.prive_index,
+                        })
+                  },
+                }
+            })
+        }
+    </script>
+</html>

@@ -1,0 +1,243 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/cui.css">
+    <link rel="stylesheet" href="../css/swiper-3.3.1.min.css">
+    <link rel="stylesheet" href="../css/teach/jsxq.css">
+    <link rel="stylesheet" href="../css/common.css">
+   <title>淘乐课</title>
+ </head>
+ <body>
+  <div id="app">
+    <div class="container">
+      <div class="map_top bg">
+        <img src="../img/index/down-icon@2x.png" alt="" @click="Back()">
+        <div>教师详情</div>
+      </div>
+      <!-- 教师展示 -->
+      <div class="js_top">
+        <img src="https://tp.xiniuwangluo.cn/tlk/img/e6c0f058-b40f-412f-a6dc-a1cabd321cd4.jpg" alt="">
+        <div>王可</div>
+        <div>创意设计  11年教龄</div>
+      </div>
+      <!-- 教师简介 -->
+      <div class="jsjj_box">
+        <div class="jsjj_yy"></div>
+        <div class="jsjj">
+          <div class="jsjj_title">
+            <div class="jsjj_title_l">老师简介</div>
+            <div class="jsjj_title_r" @click="ckgd">
+              <div>查看更多</div>
+              <img src="../img/index/jsxq/icon/jiaoshixinagqing-chakangengd@2x.png" alt="">
+            </div>
+          </div>
+          <div class="jsjj_item">
+            <img src="../img/index/jsxq/icon/jiaoshixiangqing-xinxidian@2x.png" alt="">
+            <div>主攻方向：创意设计</div>
+          </div>
+          <div class="jsjj_item">
+            <img src="../img/index/jsxq/icon/jiaoshixiangqing-xinxidian@2x.png" alt="">
+            <div>  个人经历：西安美术学院产品设计本科</div>
+          </div>
+          <div class="jsjj_item last_jsjj"> 
+            <img src="../img/index/jsxq/icon/jiaoshixiangqing-xinxidian@2x.png" alt="">
+            <div>荣誉资质：北大青鸟学士后教师资格证</div>
+          </div>
+        </div>
+        
+      </div>
+      <!-- 所在商户 -->
+      <div class="szsh">
+        <div class="szsh_title">所在商户</div>
+        <div class="szsh_item">
+          <img class="szsh_item_img" src="https://tp.xiniuwangluo.cn/tlk/img/bf5b551c-f1dd-4af5-a0a6-3ab7bd37228b.jpg" alt="">
+          <div class="szsh_item_r">
+            <div class="szsh_item_r_1">莫纳梦创画室雁塔区中心 <img src="../img/index/jsxq/icon/leibiao-renzhen@2x.png" alt=""></div>
+            <div class="szsh_item_r_2">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+            </div>
+            <div class="szsh_item_r_3">
+              <div>音乐 高新区</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 特色课程 -->
+      <div class="tskc">
+        <div class="tskc_top">
+          <div>主要授课</div>
+        </div>
+        <div class="tskc_item">
+          <img class="tskc_item_logo" src="https://tp.xiniuwangluo.cn/tlk/img/ab64a49e-9f53-4042-a311-9046a866f736.jpg" alt="">
+          <div class="tskc_item_right">
+            <div class="tskc_item_name">油画体验课</div>
+            <div class="tskc_item_pf">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+            </div>
+            <div class="tskc_item_rc">
+              <div>24人参与</div>
+              <div class="tskc_item_je">
+                <div>￥</div>
+                <div>118 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tskc_item">
+          <img class="tskc_item_logo" src="https://tp.xiniuwangluo.cn/tlk/img/ab64a49e-9f53-4042-a311-9046a866f736.jpg" alt="">
+          <div class="tskc_item_right">
+            <div class="tskc_item_name">油画体验课</div>
+            <div class="tskc_item_pf">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+            </div>
+            <div class="tskc_item_rc">
+              <div>24人参与</div>
+              <div class="tskc_item_je">
+                <div>￥</div>
+                <div>118 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 学生点评 -->
+      <div class="wydp">
+        <div class="wydp_title">
+          <div>学生点评</div>
+          <img src="../img/index/jgxq/dizhixiangqing@2x.png" alt="">
+        </div>
+        <div class="wydp_item">
+          <img class="wydp_item_left" src="https://tp.xiniuwangluo.cn/tlk/img/96fe421c-c54a-499c-b7b8-d94ebb60a5d0.jpg" alt="">
+          <div class="wydp_item_right">
+            <div class="wydp_item_right_item">
+              <div class="wydp_item_right_name">我是木子李呀</div>
+              <div class="wydp_item_right_pf">
+                <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+                <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+                <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+                <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+                <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+              </div>
+            </div>
+            <div class="wydp_item_right_sj">2020.01.12 </div>
+            <div class="wydp_item_right_value">只因为在伍小鱼你可以看到孩子最开心最纯真的笑，因为在伍
+              小鱼你可以看到孩子最开心最纯真的笑</div>
+            <div class="wydp_item_right_ptup">
+              <img src="https://tp.xiniuwangluo.cn/tlk/img/96fe421c-c54a-499c-b7b8-d94ebb60a5d0.jpg" alt="">
+              <img src="https://tp.xiniuwangluo.cn/tlk/img/96fe421c-c54a-499c-b7b8-d94ebb60a5d0.jpg" alt="">
+              <img src="https://tp.xiniuwangluo.cn/tlk/img/96fe421c-c54a-499c-b7b8-d94ebb60a5d0.jpg" alt="">
+              <img src="https://tp.xiniuwangluo.cn/tlk/img/96fe421c-c54a-499c-b7b8-d94ebb60a5d0.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 商户信息 -->
+      <div class="shxx">
+        <div class="shxx_title">商户信息</div>
+        <div class="shxx_item">
+          <img src="../img/index/jgxq/shanghuxinxi-shijian@2x.png" alt="">
+          <div>周一 二 三 四至周日    09:00-19:00</div>
+        </div>
+      </div>
+    </div>
+    <!-- 底部 -->
+    <div class="jg_bottom">
+      <div class="jg_b_l">
+        <div class="jg_b_l_kf">
+          <img src="../img/index/jgxq/kf.png" alt="">
+          <div>客服</div>
+        </div>
+      </div>
+      <div class="jg_b_r">
+        <div>我要点评</div>
+        <div>预约试听</div>
+      </div>
+    </div>
+    <!-- 教师简介 查看更多 -->
+    <div class="zhezhao" v-if="yyzt" @click="gbjsjj()">
+      <div class="jsgd_jj">
+        <div class="jsgd_jj_item jsgd_name">
+          <div>王可</div>
+          <div>创意设计 11年教龄</div>
+        </div>
+        <div class="jsgd_jj_item">
+          <div>主攻方向</div>
+          <div>创意设计</div>
+        </div>
+        <div class="jsgd_jj_item">
+          <div>主攻方向</div>
+          <div>创意设计</div>
+        </div>
+        <div class="jsgd_jj_item">
+          <div>主攻方向</div>
+          <div>创意设计</div>
+        </div>
+        <div class="jsgd_jj_item">
+          <div>主攻方向</div>
+          <div>创意设计</div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </body>
+ <script src="../js/jquery.min.js"></script>
+<script src="../js/swiper-3.3.1.min.js"></script>
+<script src="../js/cui.js"></script>
+<script src="../js/flexible_css.js"></script>
+<script src="../js/flexible.js"></script>
+<script src="../utils/util.js"></script>
+<script src="../js/vue.js"></script>
+<script>
+  window.onload = function () {
+          var vm = new Vue({
+              el: "#app",
+              data: {
+                yyzt:0,
+              },
+              created:function(){
+              },
+              mounted: function (e) {
+                var _this = this;
+                // 初始化轮播图
+                // _this.initBanner(); 
+                },
+              methods:{
+                Back(){
+                  window.location='../index.html'
+                },
+                ckgd(){ // 教师简介查看更多
+                  $('html').addClass('noscroll')
+                  this.yyzt = !this.yyzt
+                },
+                gbjsjj(){ // 关闭教师简介
+                  $('html').removeClass('noscroll')
+                  this.yyzt = !this.yyzt
+                },
+                initBanner:function(){ // 初始化轮播图
+                      let _this = this
+                      var mySwiper = new Swiper('.swiper-container', {
+                          autoplay: 3000,//可选选项，自动滑动
+                          speed:500,
+                          pagination : '.swiper-pagination',
+                      })
+                  },
+              }
+          })
+      }
+  </script>
+ </html>

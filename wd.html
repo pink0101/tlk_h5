@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/flexible_css.js"></script>
+    <script src="js/flexible.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/cui.css">
+    <link rel="stylesheet" href="css/wd/wd.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/cui.js"></script>
+    <title>淘乐课</title>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <!-- 顶部 -->
+      <div class="wd_top">
+        <img class="wd_logo" src="img/mine/icon-shouye-xuanzhong@2x.png" alt="">
+        <div>去授权</div>
+      </div>
+      <!-- vip -->
+      <div class="vip">
+        <div class="vip_l">
+          <div class="vip_l_top">
+            <img src="img/mine/vip@2x.png" alt="">
+            <div>VIP中心</div>
+          </div>
+          <div class="vip_l_bottom">成为会员，享受属于你的待遇</div>
+        </div>
+        <div class="vip_r">
+          <div>开通会员</div>
+          <img src="img/mine/kaitonghuiyuan@2x.png" alt="">
+        </div>
+      </div>
+      <!-- 我的订单 -->
+      <div class="wddd">
+        <div class="wddd_t">我的订单</div>
+        <div class="wddd_b">
+          <div class="wddd_item">
+            <img src="img/mine/keshiyong@2x.png" alt="">
+            <div>可使用</div>
+          </div>
+          <div class="wddd_item">
+            <img src="img/mine/keshiyong@2x.png" alt="">
+            <div>可使用</div>
+          </div>
+          <div class="wddd_item">
+            <img src="img/mine/keshiyong@2x.png" alt="">
+            <div>可使用</div>
+          </div>
+        </div>
+      </div>
+      <!-- 必备工具 -->
+      <div class="bbgj">
+        <div class="bbgj_t">必备工具</div>
+        <div class="bbgj_b">
+          <div class="bbgj_item">
+            <img src="img/mine/baobei@2x.png" alt="">
+            <div>宝贝</div>
+          </div>
+          <div class="bbgj_item">
+            <img src="img/mine/huodong@2x.png" alt="">
+            <div>活动</div>
+          </div>
+          <div class="bbgj_item">
+            <img src="img/mine/yuyue@2x.png" alt="">
+            <div>预约</div>
+          </div>
+          <div class="bbgj_item">
+            <img src="img/mine/youhuiquan@2x.png" alt="">
+            <div>优惠劵</div>
+          </div>
+          <div class="bbgj_item">
+            <img src="img/mine/jifenshangcheng@2x.png" alt="">
+            <div>积分商城</div>
+          </div>
+          <div class="bbgj_item">
+            <img src="img/mine/kefu@2x.png" alt="">
+            <div>客服</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 底部tab -->
+    <div class="tabBar">  
+        <div  class="tabBar_item" @click="index()">
+            <img src="./img/tabbar/shouyeweixuanzhong@2x.png" alt="">
+            <div>首页</div>
+        </div>
+        <div  class="tabBar_item" @click="zhd()">
+            <img src="./img/tabbar/zhaohuodongweixuanzhong@2x.png" alt="">
+            <div>找活动</div>
+        </div>
+        <div class="tabBar_item" @click="phb()">
+            <img src="./img/tabbar/paihangbangweixuqanhzong@2x.png" alt="">
+            <div>排行榜</div>
+        </div>
+        <div class="tabBar_item">
+            <img src="./img/tabbar/wodexuanzhong@2x.png" alt="">
+            <div>我的</div>
+        </div>
+    </div>
+  </div>
+</body>
+<!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+<script src="js/vue.js"></script>
+<script>
+  window.onload = function () {
+      new Vue({
+          el: "#app",
+          data: {
+            mes:'123'
+          },
+          methods:{
+              index:function(){
+                  window.location='index.html'
+              },
+              zhd:function(){
+                window.location='zhd.html'
+              },
+              phb:function(){
+                window.location='phb.html'
+              }
+          }
+      })
+  }
+</script>
+</html>

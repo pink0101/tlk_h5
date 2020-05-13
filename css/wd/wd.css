@@ -1,0 +1,137 @@
+.wd_top{
+  height:3.43rem;
+  background:rgba(251,226,63,1);
+  display: flex;
+  align-items: center;
+  padding-left: 0.53rem;
+}
+.wd_logo{
+  width:1.39rem;
+  height:1.39rem;
+  margin-right: 0.43rem;
+}
+.wd_top div{
+  font-size:0.37rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:bold;
+  color:rgba(60,60,60,1);
+}
+.vip{
+  width:8.96rem;
+  height:2.21rem;
+  background:rgba(255,255,255,1);
+  box-shadow:0rem 0rem 1rem rgba(0,0,0,0.1);
+  border-radius: 0.2rem;
+  margin:-0.6rem auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.45rem;
+  align-items: center;
+}
+.vip_l_top{
+  display: flex;
+  align-items: center;
+}
+.vip_l_top img{
+  width:0.98rem;
+height:0.81rem;
+}
+.vip_l_top div{
+  font-size:0.45rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(254,103,62,1);
+margin-left: 0.32rem;
+}
+.vip_l_bottom{
+  font-size:0.27rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(254,103,62,1);
+margin-top: 0.2rem;
+}
+.vip_r{
+  position: relative;
+}
+.vip_r img{
+  width:1.97rem;
+  height:0.93rem;
+}
+.vip_r div{
+  position: absolute;
+  top: 0.29rem;
+  left: 0.27rem;
+  font-size:0.27rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(255,255,255,1);
+}
+.wddd{
+  margin-top: 1rem;
+  padding: 0 0.53rem;
+}
+.wddd_t{
+  font-size:0.43rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:bold;
+  line-height:0.53rem;
+  color:rgba(60,60,60,1);
+}
+.wddd_b{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+  padding: 0 0.24rem;
+}
+.wddd_item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wddd_item img{
+  width:0.77rem;
+  height:0.69rem;
+}
+.wddd_item div{
+  font-size:0.27rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(51,51,51,1);
+margin-top: 0.08rem;
+}
+
+.bbgj{
+  margin-top: 0.5rem;
+  padding: 0 0.53rem;
+}
+.bbgj_t{
+  font-size:0.43rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:bold;
+  line-height:0.53rem;
+  color:rgba(60,60,60,1);
+}
+.bbgj_b{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+}
+.bbgj_item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+.bbgj_item img{
+  width:0.77rem;
+  height:0.69rem;
+}
+.bbgj_item div{
+  font-size:0.27rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(51,51,51,1);
+margin-top: 0.08rem;
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/flexible_css.js"></script>
+    <script src="../js/flexible.js"></script>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/cui.css">
+    <link rel="stylesheet" href="../css/swiper-3.3.1.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/kc/kcxq.css">
+    <title>淘乐课</title>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <div class="map_top">
+        <img src="../img/index/down-icon@2x.png" alt="" @click="Back()">
+        <div>课程详情</div>
+      </div>
+      <!-- 轮播图 -->
+      <div class="bg">
+        <div class="lbt">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img class="lbt_img" src="https://tp.xiniuwangluo.cn/tlk/img/82965aaf-444e-442d-b016-0c37877ca146.jpg" alt="">
+              </div>
+              <div class="swiper-slide">
+                <img class="lbt_img" src="https://tp.xiniuwangluo.cn/tlk/img/82965aaf-444e-442d-b016-0c37877ca146.jpg" alt="">
+              </div>
+            </div>
+          </div>
+          <!-- <div class="qb">全部(8)</div> -->
+        </div>
+      </div>
+      
+      <!-- 课程信息 -->
+      <div class="jg_xx">
+        <div class="jg_title">油画沙龙体验课（40*30油画框）</div>
+        <div class="jg_pf">
+          <img src="../img/rangking/xingjixuanhzong@3x.png" alt="1">
+          <img src="../img/rangking/xingjixuanhzong@3x.png" alt="1">
+          <img src="../img/rangking/xingjixuanhzong@3x.png" alt="2">
+          <img src="../img/rangking/xingjixuanhzong@3x.png" alt="1">
+          <img src="../img/rangking/xingjixuanhzong@3x.png" alt="1">
+        </div>
+        <div class="jg_xx_bot">
+          <div>美术 &nbsp; 雁塔区</div>
+          <div class="jg_xx_bot_je">
+            <div>￥</div>
+            <div>2.17</div>
+          </div>
+        </div>
+      </div>
+      <!-- 适用商户 -->
+      <div class="sysh">
+        <div class="sysh_l">
+          <div class="sysh_l_title">
+            <img src="../img/mine/dd/dd.png" alt="">
+            <div>适用商户</div>
+          </div>
+          <div class="sysh_l_name">多米田绘艺术馆</div>
+          <div class="sysh_l_pf">
+            <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+            <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+            <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+            <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+            <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+          </div>
+        </div>
+        <div class="sysh_r">
+          <img src="../img/index/jgxq/bodadianhua@2x.png" alt="">
+        </div>
+      </div>
+      <!-- 机构位置信息 -->
+      <div class="jg_wz">
+        <div class="jg_wz_left">
+          <img class="jg_wz_img" src="../img/index/jgxq/xiangxidizhi@2x.png" alt="">
+          <div class="jg_wz_name">小寨东路11号一又二分之一国际公寓B座1501小寨东路与红小巷十字）</div>
+        </div>
+        <div class="jg_wz_phone">
+          <img src="../img/mine/gengduodingdan@2x.png" alt="">
+        </div>
+      </div>
+      <!-- 课程模式 -->
+      <div class="kcms">
+        <div class="kcms_title">
+          <img src="../img/index/kcxq/2548@2x.png" alt="">
+          <div>课程模式</div>
+        </div>
+        <div class="kcms_box">
+          <div class="kcms_item">
+            <div>适合人群</div>
+            <div>14岁以上</div>
+          </div>
+          <div class="kcms_item">
+            <div>适合基础</div>
+            <div>基础不限</div>
+          </div>
+          <div class="kcms_item">
+            <div>上课人数</div>
+            <div>1对1辅导</div>
+          </div>
+        </div>
+      </div>
+      <!-- 课程详情 -->
+      <div class="kcxq">
+        <div class="kcxq_name">课程详情</div>
+        <div class="kcxq_value">学会粘土颜色调制、画面构图、二维到三维立体转换、物体细节仿真塑形、综合材料运用、辅助工具运用等</div>
+      </div>
+      <!-- 课堂照片 -->
+      <div class="ktzp">
+        <div >课堂照片</div>
+        <img src="https://tp.xiniuwangluo.cn/tlk/img/80eb9fab-1d7b-4eb7-9be7-cbfa1641f300.jpg" alt="">
+      </div>
+      <!-- 网友点评 -->
+      <div class="wydp">
+        <div class="wydp_title">
+          <div>网友点评</div>
+          <img src="../img/index/jgxq/dizhixiangqing@2x.png" alt="">
+        </div>
+        <div class="wydp_item">
+          <img class="wydp_item_left" src="https://tp.xiniuwangluo.cn/tlk/img/96fe421c-c54a-499c-b7b8-d94ebb60a5d0.jpg" alt="">
+          <div class="wydp_item_right">
+            <div class="wydp_item_right_item">
+              <div class="wydp_item_right_name">我是木子李呀</div>
+              <div class="wydp_item_right_pf">
+                <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+                <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+                <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+                <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+                <img src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+              </div>
+            </div>
+            <div class="wydp_item_right_sj">2020.01.12 </div>
+            <div class="wydp_item_right_value">只因为在伍小鱼你可以看到孩子最开心最纯真的笑，因为在伍
+              小鱼你可以看到孩子最开心最纯真的笑</div>
+            <div class="wydp_item_right_ptup">
+              <img src="https://tp.xiniuwangluo.cn/tlk/img/96fe421c-c54a-499c-b7b8-d94ebb60a5d0.jpg" alt="">
+              <img src="https://tp.xiniuwangluo.cn/tlk/img/96fe421c-c54a-499c-b7b8-d94ebb60a5d0.jpg" alt="">
+              <img src="https://tp.xiniuwangluo.cn/tlk/img/96fe421c-c54a-499c-b7b8-d94ebb60a5d0.jpg" alt="">
+              <img src="https://tp.xiniuwangluo.cn/tlk/img/96fe421c-c54a-499c-b7b8-d94ebb60a5d0.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 商户信息 -->
+      <div class="shxx">
+        <div class="shxx_title">商户信息</div>
+        <div class="shxx_item">
+          <img src="../img/index/jgxq/shanghuxinxi-shijian@2x.png" alt="">
+          <div>周一 二 三 四至周日    09:00-19:00</div>
+        </div>
+      </div>
+
+    </div>
+    <!-- 底部 -->
+    <div class="jg_bottom">
+      <div class="jg_b_l">
+        <div class="jg_b_l_kf">
+          <img src="../img/index/jgxq/kf.png" alt="">
+          <div>客服</div>
+        </div>
+        <div class="jg_b_l_fx">
+          <img src="../img/index/jgxq/huodong-fenxiang@2x.png" alt="">
+          <div>分享</div>
+        </div>
+      </div>
+      <div class="jg_b_r">
+        <div>我要点评</div>
+        <div>预约试听</div>
+      </div>
+    </div>
+    <!-- 点评 -->
+    <div class="kcdp">点评</div>
+  </div>
+</body>
+<script src="../js/swiper-3.3.1.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/cui.js"></script>
+<script>
+  window.onload = function () {
+      new Vue({
+          el: "#app",
+          data: {
+          },
+          created:function(){
+
+          },
+          mounted: function (e) {
+              var _this = this;
+              // 初始化轮播图
+              _this.initBanner();  
+              },
+          methods:{
+            Back(){
+                  window.location='../index.html'
+            },
+            initBanner:function(){ // 初始化轮播图
+                    let _this = this
+                    var mySwiper = new Swiper('.swiper-container', {
+                        autoplay: 3000,//可选选项，自动滑动
+                        speed:500,
+                        pagination : '.swiper-pagination',
+                    })
+                },
+          }
+      })
+  }
+</script>
+</html>

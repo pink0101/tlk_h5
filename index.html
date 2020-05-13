@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="divport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/cui.css">
+    <link rel="stylesheet" href="css/swiper-3.3.1.min.css">
+    <link rel="stylesheet" href="css/index/index.css">
+    <link rel="stylesheet" href="css/common.css">
+    <title>淘乐课</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <!-- 头部导航栏 -->
+            <div class="top">
+                <div class="top_nav" @click="map()">
+                    <div class="nav_left"  v-cloak>{{this.area}}</div>
+                    <img  class="nav_content" src="img/index/down-icon@3x.png"></img>
+                </div>
+                <!-- input框 -->
+                <div class="top_input">
+                    <div class="top_input-left" v-cloak >{{this.searchName}}</div>
+                    <input class="search"  v-cloak :placeholder="'搜索'+searchName +'名称'" v-model="sssj"></input>
+                    <div class="loupe" @click="sousuo(searchName)"> <img class="loupe_image" src="img/index/Icon-Search@2x.png"></img></div>
+                </div>
+            </div>
+            <!-- 轮播图 -->
+            <div class="lbt">
+                <div class="swiper-container" >
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" v-for="(item,index) in lbt_sj" :key="index">
+                            <img :class="[nowIdx==index?'lbt_img le-active':'lbt_img' ]" :src="'https://tp.xiniuwangluo.cn'+item.gg_logo" alt="131">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <!-- 二级标题 -->
+            <div class="ej_title">
+                <div :class="[ej_ztgb_sj == index ? 'ej_item ej_active':'ej_item' ]" v-for="(item,index) in ej_title_sj" @click="ej_ztgb(index)">
+                    <img :src="item.img" alt="">
+                    <div v-cloak>{{item.name}}</div>
+                </div>
+            </div>
+            <!-- 三级标题 -->
+            <div class="sj_title">
+                <div class="swiper-container1">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                          <div class="sj_nav">
+                            <div class="sj_item" v-for="item in yifllist" @click="jglists(1,item.hy_id,item.hyclassify)">
+                                <img :src="'https://tp.xiniuwangluo.cn' + item.url" alt="">
+                                <div  v-cloak>{{item.hyclassify}}</div>
+                            </div>
+                            <div class="sj_item">
+                                <img src="./img/index/quanbufenlei2@2x.png" alt="">
+                                <div>全部分类</div>
+                            </div>
+                          </div>
+                      </div> 
+                      <div class="swiper-slide">
+                           <div class="sj_nav">
+                                <div class="sj_item" v-for="item in yifllist" @click="jglists(3,item.hy_id,item.hyclassify)">
+                                    <img :src="'https://tp.xiniuwangluo.cn' + item.url1" alt="">
+                                    <div v-cloak>{{item.hyclassify}}</div>
+                                </div>
+                                <div class="sj_item">
+                                    <img src="./img/index/quanbufenlei3@2x.png" alt="">
+                                    <div>全部分类</div>
+                                </div>
+                           </div>
+                      </div>
+                      <div class="swiper-slide">
+                           <div class="sj_nav">
+                            <div class="sj_item" v-for="item in yifllist" @click="jglists(2,item.hy_id,item.hyclassify)">
+                                <img :src="'https://tp.xiniuwangluo.cn' + item.url2" alt="">
+                                <div v-cloak>{{item.hyclassify}}</div>
+                            </div>
+                            <div class="sj_item">
+                                <img src="./img/index/quanbufenlei1@2x.png" alt="">
+                                <div>全部分类</div>
+                            </div>
+                           </div>
+                      </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <!-- 近期活动 -->
+            <div class="jqhd">
+                <div class="jqhd_title">近期活动</div>
+                <div class="jqhd_w">
+                    <div class="jqhd_item" v-for="item in bnrUrl" :key="item.hd_id">
+                        <img  :src=" 'https://tp.xiniuwangluo.cn' + item.hd_logo " alt="">
+                        <div  v-cloak>{{item.hd_name}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 猜你喜欢 -->
+            <div class="cnxh">
+                <div class="cnxh_title">猜你喜欢</div>
+                <!-- 机构 -->
+                <div class="cnxh_item" v-for="(item,index) in jglist" v-if="ej_ztgb_sj == 0" @click="jgxq(item.jg_id)">
+                    <img class="cnxh_item_img" :src="item.jg_logo" alt="">
+                    <div class="cnxh_item_right">
+                        <div class="cnxh_item_right_1">
+                            <div  v-cloak>{{ item.jg_name }}</div>
+                            <img src="./img/index/jglist/leibiao-renzhen@2x.png" alt="">
+                        </div>
+                        <div class="cnxh_item_right_2">
+                            <img v-for="item in item.score" src="./img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+                            <img v-for="item in 5 - item.score" src="./img/index/jsxq/icon/pingjiayemian-xingjiweixuanhzong@2x.png" alt="">
+                        </div>
+                        <div class="cnxh_item_right_3">
+                            <div v-cloak>音乐 {{item.jg_area}}</div>
+                            <div v-if="item.jl != 1000000"  v-cloak>{{item.jl}}km</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 教师 -->
+                <div class="cnxh_item" v-for="(item,index) in jslist" v-if="ej_ztgb_sj == 1" @click="jsxq(item.js_id)">
+                    <img class="cnxh_item_img js_logo" :src="item.js_logo" alt="">
+                    <div class="cnxh_item_right">
+                        <div class="cnxh_item_right_1">
+                            <div  v-cloak>{{ item.js_name }}</div>
+                            <!-- <img src="./img/index/jglist/leibiao-renzhen@2x.png" alt=""> -->
+                        </div>
+                        <div class="cnxh_item_right_2">
+                            <img v-for="item in item.score" src="./img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+                            <img v-for="item in 5 - item.score" src="./img/index/jsxq/icon/pingjiayemian-xingjiweixuanhzong@2x.png" alt="">
+                        </div>
+                        <div class="cnxh_item_right_3">
+                            <div  v-cloak>{{item.js_sex}}   {{item.js_jl}}年教龄  {{item.js_zc}}</div>
+                            <div v-if="item.jl != 1000000" v-cloak>{{item.jl}}km</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 课程 -->
+                <div class="cnxh_item" v-for="(item,index) in kclist" v-if="ej_ztgb_sj == 2" @click='kcxq(item.kc_id)'>
+                    <img class="cnxh_item_img " :src="item.kc_logo" alt="">
+                    <div class="cnxh_item_right">
+                        <div class="cnxh_item_right_1">
+                            <div v-cloak>{{ item.kc_name }}</div>
+                            <!-- <img src="./img/index/jglist/leibiao-renzhen@2x.png" alt=""> -->
+                        </div>
+                        <div class="cnxh_item_right_2">
+                            <img v-for="item in item.score" src="./img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+                            <img v-for="item in 5 - item.score" src="./img/index/jsxq/icon/pingjiayemian-xingjiweixuanhzong@2x.png" alt="">
+                        </div>
+                        <div class="cnxh_item_right_3">
+                            <div v-cloak>美术   {{item.kc_area}}</div>
+                            <div v-cloak v-if="item.jl != 1000000">{{item.jl}}km</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 底部tab -->
+        <div class="tabBar">
+            <div class="tabBar_item">
+                <img src="./img/tabbar/shouyexuanzhong@2x.png" alt="">
+                <div>首页</div>
+            </div>
+            <div class="tabBar_item" @click="zhd()">
+                <img src="./img/tabbar/zhaohuodongweixuanzhong@2x.png" alt="">
+                <div>找活动</div>
+            </div>
+            <div class="tabBar_item" @click="phb()">
+                <img src="./img/tabbar/paihangbangweixuqanhzong@2x.png" alt="">
+                <div>排行榜</div>
+            </div>
+            <div class="tabBar_item" @click="wd()">
+                <img src="./img/tabbar/wodebuxuanzhong@2x.png" alt="">
+                <div>我的</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/swiper-3.3.1.min.js"></script>
+<script src="js/cui.js"></script>
+<script src="js/flexible_css.js"></script>
+<script src="js/flexible.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=zaez3n0qVfp0bWlrEQq2C0iXasCcg4Vi"></script>
+<script src="./utils/util.js"></script>
+<script src="js/vue.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                lbt_sj:[
+                    {
+                        'gg_logo':'/tlk/img/shouyebanner2.png',
+                    }
+                ],
+                nowIdx:0, // 顶部轮播图 改变时的状态
+                bnrUrl:[],
+                sssj:'',
+                yifllist:[],
+                searchName:'机构',
+                area:'新城区',
+                // 教师
+                jslist:[],
+                // 机构
+                jglist:[],
+                // 课程
+                kclist:[],
+                jgys:1,// 机构页数
+                jsys:1,// 教师页数
+                kcys:1,// 课程页数
+                ej_ztgb_sj:0,
+                ymgd:null, // 页面高度
+                ej_title_sj:[
+                    {
+                        name:'找机构',
+                        img:'./img/index/zhaojigou@2x.png'
+                    },
+                    {
+                        name:'找教师',
+                        img:'./img/index/zhaojiaoshi@2x.png'
+                    },
+                    {
+                        name:'找课程',
+                        img:'./img/index/zhoakecheng@2x.png'
+                    },
+                ]
+            },
+            created:function(){
+                var _this = this;
+                //  获取轮播图数据
+                _this.banner()
+                // 获取近期活动数据
+                _this.bnrUrl_sj()
+                // 获取三级标题内容
+                _this.yifllist_sj()
+                // 获取当前位置信息
+                _this.getLocal()
+                
+            },
+            mounted: function (e) {
+                var _this = this;
+                // 初始化轮播图
+                _this.initBanner();  
+                // 初始化 二级标题轮播        
+                _this.initBanner1();  
+                // 数据预加载
+                _this.scroll()
+                
+            },
+            methods:{
+                sousuo(name){
+                    window.sessionStorage.setItem('hd_id', JSON.stringify(''))
+                    window.sessionStorage.setItem('fl_name', JSON.stringify(''))
+                    if(name == '机构'){
+                        window.sessionStorage.setItem('zid', JSON.stringify(1))
+                        window.sessionStorage.setItem('sssj', JSON.stringify(this.sssj))
+                        window.location='jg/jgjskclist.html'
+                    }else if(name == '教师'){
+                        window.sessionStorage.setItem('zid', JSON.stringify(3))
+                        window.sessionStorage.setItem('sssj', JSON.stringify(this.sssj))
+                        window.location='jg/jgjskclist.html'
+                        
+                    }else if(name == '课程'){
+                        window.sessionStorage.setItem('zid', JSON.stringify(2))
+                        window.sessionStorage.setItem('sssj', JSON.stringify(this.sssj))
+                        window.location='jg/jgjskclist.html'
+                    }
+                },
+                jglists(id,hd_id,fl_name){ // id 控制是机构 、教师、 课程
+                    console.log(id,hd_id,fl_name)
+                    window.sessionStorage.setItem('sssj', JSON.stringify(this.sssj))
+                    window.sessionStorage.setItem('zid', JSON.stringify(id))
+                    window.sessionStorage.setItem('hd_id', JSON.stringify(hd_id))
+                    window.sessionStorage.setItem('fl_name', JSON.stringify(fl_name))
+                    window.location='jg/jgjskclist.html'
+                },
+                jgxq(jgid){
+                    console.log(jgid)
+                    window.sessionStorage.setItem('jgid', JSON.stringify(jgid))
+                    window.location='jg/jgxq.html'
+                },
+                jsxq(jsid){
+                    console.log(jsid)
+                    window.sessionStorage.setItem('jsid', JSON.stringify(jsid))
+                    window.location='teach/jsxq.html'
+                },
+                kcxq(kcid){
+                    console.log(kcid)
+                    window.sessionStorage.setItem('kcid', JSON.stringify(kcid))
+                    window.location='kc/kcxq.html'
+                },
+                scroll(){// 判断页面是否滚动到底部
+                    let _this = this
+                    window.onscroll = function(){
+                        //变量scrollTop是滚动条滚动时，距离顶部的距离
+                        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop; 
+                        
+                        //变量windowHeight是可视区的高度 
+                        var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+
+                        //变量scrollHeight是滚动条的总高度
+                        var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight; 
+                        _this.ymgd = scrollHeight
+                        // console.log(scrollTop)
+                        // console.log(scrollHeight)
+                        // console.log(scrollTop)
+
+                        //滚动条到底部的条件
+                        if (scrollTop + windowHeight >= _this.ymgd) {        
+                            //已滚动底部
+                            // console.log('滚动到底部')
+                            // 触底事件
+                            _this.information_Load();
+                        }
+                    }
+                },
+                information_Load(){// 触底事件
+                    let latitude = JSON.parse(sessionStorage.getItem('latitude'))
+                    let longitude = JSON.parse(sessionStorage.getItem('longitude'))
+                    // console.log(latitude)
+                    let _this = this
+                    if(this.ej_ztgb_sj == 0){
+                        // 页数加1
+                        _this.jgys = _this.jgys + 1
+                        // 获取机构数据
+                        $.ajax({
+                            url: 'https://tp.xiniuwangluo.cn/tlkxcx/getsytjlist.do',
+                            type: 'post',
+                            data: {"zhy_id": 1, "n": longitude, "e": latitude, "jg_area": _this.area,'ys':_this.jgys},
+                            header: {
+                                'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                            },
+                            dataType:'json',
+                            cache: false,
+                            success: function (ret) {
+                                if(ret.return_code === '0003'){
+                                    cui.toast({title: '没有更多数据', location: 'middle', showtime: 2000})
+                                    return
+                                }
+                                cui.hideload();
+                                let xjglist = []
+                                ret.jglist.map(item => {
+                                    let jd = item.n
+                                    let wd = item.e
+                                    if (jd === '' || wd === '') {
+                                        item.jl = 1000000
+                                        xjglist.push(item)
+                                    }
+                                    if (jd !== '' || wd !== '') {
+                                        function rad(d){
+                                            return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                        }
+                                        // 计算距离
+                                        var radLat1 = rad(latitude);
+                                        var radLat2 = rad(jd);
+                                        var a = radLat1 - radLat2;
+                                        var b = rad(longitude) - rad(wd);
+                                        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                        s = s * 6378.137;
+                                        // EARTH_RADIUS;
+                                        s = Math.round(s * 10000) / 10000;
+                                        let ss = s.toFixed(1)
+                                        let obj2 = {}
+                                        obj2 = Object.assign({}, item, { jl: parseFloat(ss) })
+                                        xjglist.push(obj2)
+                                    }
+                                })
+                                let xxjg = sortarr(xjglist)
+                                // console.log('排序后的jg数组', xxjg)
+                                xxjg.map((item, index) => {
+                                    if (item.jg_logo === '' || item.jg_logo === '-1') {
+                                    return item.jg_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                    }
+                                    return item.jg_logo = 'https://tp.xiniuwangluo.cn' + item.jg_logo
+                                })
+                                _this.jglist = _this.jglist.concat(xxjg)
+                            },
+                            error: function (ret, err) {
+                                cui.hideload();
+                            }
+                        });
+                    }else if(this.ej_ztgb_sj == 1){
+                        // 页数加1
+                        _this.jsys = _this.jsys + 1
+                        // 获取教师数据
+                        $.ajax({
+                            url: 'https://tp.xiniuwangluo.cn/tlkxcx/getsytjlist.do',
+                            type: 'post',
+                            data: {"zhy_id": 3, "n": longitude, "e": latitude, "jg_area": _this.area,'ys':_this.jsys},
+                            header: {
+                                'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                            },
+                            dataType:'json',
+                            cache: false,
+                            success: function (ret) {
+                                if(ret.return_code === '0003'){
+                                    cui.toast({title: '没有更多数据', location: 'middle', showtime: 2000})
+                                    return
+                                }
+                                cui.hideload();
+                                ret.jslist.map(item => {
+                                    let jd = item.n
+                                    let wd = item.e
+                                    if (jd === '' || wd === '') {
+                                        item.jl = 1000000
+                                    }
+                                    if (jd !== '' || wd !== '') {
+                                        function rad(d){
+                                            return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                        }
+                                        // 计算距离
+                                        var radLat1 = rad(latitude);
+                                        var radLat2 = rad(jd);
+                                        var a = radLat1 - radLat2;
+                                        var b = rad(longitude) - rad(wd);
+                                        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                        s = s * 6378.137;
+                                        s = Math.round(s * 10000) / 10000;
+                                        let ss = s.toFixed(1)
+                                        return item.jl = parseFloat(ss)
+                                    }
+                                })
+                                let xxjs = sortarr(ret.jslist)
+                                // console.log('排序后的数组', xxjs)
+                                xxjs.map((item, index) => {
+                                    if (item.js_logo === '' || item.js_logo === '-1') {
+                                        return item.js_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                    } else {
+                                        return item.js_logo = 'https://tp.xiniuwangluo.cn' + item.js_logo
+                                    }
+                                })
+                                _this.jslist = _this.jslist.concat(xxjs)
+                            },
+                            error: function (ret, err) {
+                                cui.hideload();
+                            }
+                        });
+                    }else{
+                        // 页数加1
+                        _this.kcys = _this.kcys + 1
+                        // 获取课程数据
+                        $.ajax({
+                            url: 'https://tp.xiniuwangluo.cn/tlkxcx/getsytjlist.do',
+                            type: 'post',
+                            data: {"zhy_id": 2, "n": longitude, "e": latitude, "jg_area": _this.area,'ys':_this.kcys},
+                            header: {
+                                'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                            },
+                            dataType:'json',
+                            cache: false,
+                            success: function (ret) {
+                                if(ret.return_code === '0003'){
+                                    cui.toast({title: '没有更多数据', location: 'middle', showtime: 2000})
+                                    return
+                                }
+                                cui.hideload();
+                                ret.kclist.map(item => {
+                                    let jd = item.n
+                                    let wd = item.e
+                                    if (jd === '' || wd === '') {
+                                        item.jl = 1000000
+                                    }
+                                    if (jd !== '' || wd !== '') {
+                                        function rad(d){
+                                            return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                        }
+                                        // 计算距离
+                                        var radLat1 = rad(latitude);
+                                        var radLat2 = rad(jd);
+                                        var a = radLat1 - radLat2;
+                                        var b = rad(longitude) - rad(wd);
+                                        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                        s = s * 6378.137;
+                                        s = Math.round(s * 10000) / 10000;
+                                        let ss = s.toFixed(1)
+                                        return item.jl = parseFloat(ss)
+                                    }
+                                })
+                                let xxjs = sortarr(ret.kclist)
+                                // console.log('排序后的kc数组', xxjs)
+                                xxjs.map((item, index) => {
+                                    if (item.kc_logo === '' || item.kc_logo === '-1') {
+                                        return item.kc_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                    } else {
+                                        return item.kc_logo = 'https://tp.xiniuwangluo.cn' + item.kc_logo
+                                    }
+                                })
+                                _this.kclist = _this.kclist.concat(xxjs)
+                            },
+                            error: function (ret, err) {
+                                cui.hideload();
+                            }
+                        });
+                    }
+                },
+                getLocal(){ // 获取当前省市区信息
+                    let city = JSON.parse(sessionStorage.getItem('city'))
+                    if(city){
+                        this.area = city
+                        // 如果当前有 city  改变区域并重新获取数据
+                        this.list_sj()
+                        return
+                    }
+                    let _this = this
+                    var geolocation = new BMap.Geolocation();
+                    var gc = new BMap.Geocoder();
+                    geolocation.getCurrentPosition(function (r) {
+                        // console.log(r);
+                        // 将 经纬度存入本地
+                        window.sessionStorage.setItem('latitude', JSON.stringify(r.latitude))
+                        window.sessionStorage.setItem('longitude', JSON.stringify(r.longitude))
+                        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                            var pt = r.point;
+                            gc.getLocation(pt, function (rs) {
+                                var addComp = rs.addressComponents;
+                                var province = addComp.province;
+                                var city = addComp.city;
+                                var area = addComp.district;
+                                // console.log(province+":"+city+":"+area);
+                                // console.log(addComp)
+                                _this.area = area
+                                window.sessionStorage.setItem('city', JSON.stringify(area))
+
+                                // 获取机构、教师、课程列表数据
+                                 _this.list_sj()
+                            });
+                        }
+                        else {
+                            alert("定位失败");
+                        }
+                    }, { enableHighAccuracy: true });
+                },
+                list_sj(){ // 获取猜你喜欢数据
+                    let latitude = JSON.parse(sessionStorage.getItem('latitude'))
+                    let longitude = JSON.parse(sessionStorage.getItem('longitude'))
+                    // console.log(latitude)
+                    let _this = this
+                    // 获取机构数据
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tlkxcx/getsytjlist.do',
+                        type: 'post',
+                        data: {"zhy_id": 1, "n": longitude, "e": latitude, "jg_area": _this.area,'ys':_this.jgys},
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        dataType:'json',
+                        cache: false,
+                        success: function (ret) {
+                            cui.hideload();
+                            let xjglist = []
+                            ret.jglist.map(item => {
+                                let jd = item.n
+                                let wd = item.e
+                                if (jd === '' || wd === '') {
+                                    item.jl = 1000000
+                                    xjglist.push(item)
+                                }
+                                if (jd !== '' || wd !== '') {
+                                    function rad(d){
+                                        return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                    }
+                                    // 计算距离
+                                    var radLat1 = rad(latitude);
+                                    var radLat2 = rad(jd);
+                                    var a = radLat1 - radLat2;
+                                    var b = rad(longitude) - rad(wd);
+                                    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                    s = s * 6378.137;
+                                    // EARTH_RADIUS;
+                                    s = Math.round(s * 10000) / 10000;
+                                    let ss = s.toFixed(1)
+                                    let obj2 = {}
+                                    obj2 = Object.assign({}, item, { jl: parseFloat(ss) })
+                                    xjglist.push(obj2)
+                                }
+                            })
+                            let xxjg = sortarr(xjglist)
+                            // console.log('排序后的jg数组', xxjg)
+                            xxjg.map((item, index) => {
+                                if (item.jg_logo === '' || item.jg_logo === '-1') {
+                                return item.jg_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                }
+                                return item.jg_logo = 'https://tp.xiniuwangluo.cn' + item.jg_logo
+                            })
+                            xxjg.map(item =>{
+                                    if(item.jl.toString().length == 1){
+                                        return item.jl = item.jl.toString() + '.0'
+                                    }
+                                })
+                            // console.log(xxjg)
+                            _this.jglist = xxjg
+                        },
+                        error: function (ret, err) {
+                            cui.hideload();
+                        }
+                    });
+                    // 获取教师数据
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tlkxcx/getsytjlist.do',
+                        type: 'post',
+                        data: {"zhy_id": 3, "n": longitude, "e": latitude, "jg_area": _this.area,'ys':_this.jgys},
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        dataType:'json',
+                        cache: false,
+                        success: function (ret) {
+                            cui.hideload();
+                            ret.jslist.map(item => {
+                                let jd = item.n
+                                let wd = item.e
+                                if (jd === '' || wd === '') {
+                                    item.jl = 1000000
+                                }
+                                if (jd !== '' || wd !== '') {
+                                    function rad(d){
+                                        return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                    }
+                                    // 计算距离
+                                    var radLat1 = rad(latitude);
+                                    var radLat2 = rad(jd);
+                                    var a = radLat1 - radLat2;
+                                    var b = rad(longitude) - rad(wd);
+                                    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                    s = s * 6378.137;
+                                    s = Math.round(s * 10000) / 10000;
+                                    let ss = s.toFixed(1)
+                                    return item.jl = parseFloat(ss)
+                                }
+                            })
+                            let xxjs = sortarr(ret.jslist)
+                            // console.log('排序后的js数组', xxjs)
+                            xxjs.map((item, index) => {
+                                if (item.js_logo === '' || item.js_logo === '-1') {
+                                    return item.js_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                } else {
+                                    return item.js_logo = 'https://tp.xiniuwangluo.cn' + item.js_logo
+                                }
+                            })
+                            _this.jslist = xxjs
+                        },
+                        error: function (ret, err) {
+                            cui.hideload();
+                        }
+                    });
+                    // 获取课程数据
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tlkxcx/getsytjlist.do',
+                        type: 'post',
+                        data: {"zhy_id": 2, "n": longitude, "e": latitude, "jg_area": _this.area,'ys':_this.jgys},
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        dataType:'json',
+                        cache: false,
+                        success: function (ret) {
+                            cui.hideload();
+                            ret.kclist.map(item => {
+                                let jd = item.n
+                                let wd = item.e
+                                if (jd === '' || wd === '') {
+                                    item.jl = 1000000
+                                }
+                                if (jd !== '' || wd !== '') {
+                                    function rad(d){
+                                        return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+                                    }
+                                    // 计算距离
+                                    var radLat1 = rad(latitude);
+                                    var radLat2 = rad(jd);
+                                    var a = radLat1 - radLat2;
+                                    var b = rad(longitude) - rad(wd);
+                                    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+                                    s = s * 6378.137;
+                                    s = Math.round(s * 10000) / 10000;
+                                    let ss = s.toFixed(1)
+                                    return item.jl = parseFloat(ss)
+                                }
+                            })
+                            let xxjs = sortarr(ret.kclist)
+                            // console.log('排序后的kc数组', xxjs)
+                            xxjs.map((item, index) => {
+                                if (item.kc_logo === '' || item.kc_logo === '-1') {
+                                    return item.kc_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                } else {
+                                    return item.kc_logo = 'https://tp.xiniuwangluo.cn' + item.kc_logo
+                                }
+                            })
+                            _this.kclist = xxjs
+                        },
+                        error: function (ret, err) {
+                            cui.hideload();
+                        }
+                    });
+                },
+                ej_ztgb(index){ // 二级标题点击事件
+                    if(index == 0){
+                            this.searchName = '机构'
+                        }else if(index == 1){
+                            this.searchName = '教师'
+                        }else{
+                            this.searchName = '课程'
+                    }
+                    this.ej_ztgb_sj = index
+                    // 切换三级标题
+                    this.initBanner1(index)
+                },
+                
+                yifllist_sj:function(){ // 获取三级标题内容
+                    let _this = this
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tlkxcx/getfllist.do',
+                        type: 'POST',
+                        data: {},
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        dataType:'json',
+                        cache: false,
+                        contentType: false, //不可缺
+                        processData: false, //不可缺
+                        success: function (ret) {
+                            cui.hideload();
+                            // console.log('分类数据',ret.fllist)
+                            if (ret.fllist.length < 11){
+                                _this.yifllist = ret.fllist.slice(0, 5)
+                            }else{
+                                _this.yifllist = ret.fllist
+                            }
+                        },
+                        error: function (ret, err) {
+                            cui.hideload();
+                        }
+                    });
+                },
+                
+                bnrUrl_sj:function(){ // 获取近期活动数据
+                    let _this = this
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tlkxcx/getjqhdlist.do',
+                        type: 'POST',
+                        data: {},
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        dataType:'json',
+                        cache: false,
+                        contentType: false, //不可缺
+                        processData: false, //不可缺
+                        success: function (ret) {
+                            cui.hideload();
+                            // console.log(ret.hdlist)
+                            _this.bnrUrl = ret.hdlist
+                        },
+                        error: function (ret, err) {
+                            cui.hideload();
+                        }
+                    });
+                },
+                
+                initBanner:function(){ // 初始化轮播图
+                    let _this = this
+                    var mySwiper = new Swiper('.swiper-container', {
+                        autoplay: 3000,//可选选项，自动滑动
+                        speed:500,
+                        pagination : '.swiper-pagination',
+                        onSlideChangeStart: function(swiper){
+                            // console.log(swiper.activeIndex);
+                            _this.nowIdx = swiper.activeIndex
+                        }
+                    })
+                },
+                initBanner1:function(index){ // 初始化 二级标题轮播
+                    let _this = this
+                    var mySwiper1 = new Swiper('.swiper-container1', {
+                        onSlideChangeStart: function(swiper){
+                            // console.log(swiper.activeIndex)
+                            _this.ej_ztgb_sj = swiper.activeIndex
+                            if(swiper.activeIndex == 0){
+                                _this.searchName = '机构'
+                            }else if(swiper.activeIndex == 1){
+                                _this.searchName = '教师'
+                            }else{
+                                _this.searchName = '课程'
+                            }
+                        }
+                    })
+                    if(index == 0){
+                        $('.swiper-container1 .swiper-wrapper').css({'transform':'translate3d(0px, 0px, 0px)','transition-duration':'500ms'})
+                    }
+                    mySwiper1.slideTo(index, 500, false);
+                },
+                banner:function(){ //  获取轮播图数据
+                    let _this = this
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tlkxcx/getgglist.do',
+                        type: 'POST',
+                        data: {},
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        dataType:'json',
+                        cache: false,
+                        contentType: false, //不可缺
+                        processData: false, //不可缺
+                        success: function (ret) {
+                            cui.hideload();
+                            // console.log(ret.gglist)
+                            _this.lbt_sj = ret.gglist
+                        },
+                        error: function (ret, err) {
+                            cui.hideload();
+                        }
+                    });
+                },
+                zhd:function(){
+                    window.location='zhd.html'
+                },
+                phb:function(){
+                    window.location='phb.html'
+                },
+                wd:function(){
+                  window.location='wd.html'
+                },
+                map:function(){
+                  window.location='map.html'
+                }
+            }
+        })
+    }
+</script>
+</html>

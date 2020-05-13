@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/cui.css">
+    <link rel="stylesheet" href="css/swiper-3.3.1.min.css">
+    <link rel="stylesheet" href="css/dp.css">
+    <link rel="stylesheet" href="css/common.css">
+    <title>淘乐课</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+          <div class="map_top">
+            <img src="img/index/down-icon@2x.png" alt="" @click="Back()">
+            <div>写点评</div>
+          </div>
+          <!-- 点评 -->
+          <div class="dp_top">
+              <div class="dp_top_l">
+                  <div>{{jgxx.jg_name}}</div>
+                  <img v-if="dp_id == 1 && jgxx.rz_state == 2" src="img/index/jsxq/icon/leibiao-renzhen@2x.png" alt="">
+              </div>
+              <div class="dp_top_r">发表</div>
+          </div>
+          <!-- 评星 -->
+          <div class="dp_px">
+              <div class="dp_px_item">
+                  <div>效果</div>
+                  <img v-for="(item,index) in [1,2,3,4,5]" :src="diagnosisStar >= item ? iconPath.iconStar1 : iconPath.iconStar0" alt="" @click="getStar(item)">
+              </div>
+              <div class="dp_px_item">
+                  <div>效果</div>
+                  <img v-for="(item,index) in [1,2,3,4,5]" :src="diagnosisStar1 >= item ? iconPath.iconStar1 : iconPath.iconStar0" alt="" @click="getStar1(item)">
+              </div>
+              <div class="dp_px_item">
+                  <div>效果</div>
+                  <img v-for="(item,index) in [1,2,3,4,5]" :src="diagnosisStar2 >= item ? iconPath.iconStar1 : iconPath.iconStar0" alt="" @click="getStar2(item)">
+              </div>
+          </div>
+          <!-- 评价内容 -->
+          <div class="dp_content">
+            <textarea name="" id="" maxlength="100" placeholder="亲，老师的水平怎么样，沟通是否顺利，对学习效果满意吗？" v-model="content"></textarea>
+            <div>（100字以内）</div>
+          </div>
+          <!-- 添加图片 -->
+          <div class="dp_photo">
+              <div class="dp_photo_title">
+                  <span>*</span>
+                  <div>添加图片（不超过四张）</div>
+              </div>
+              <div class="dp_photos">
+                  <div class="dp_photos_l" onclick="getElementById('upfile').click()" n="0">
+                    <img src="img/index/jsxq/icon/2549@2x.png" alt="">
+                    <div>点击添加</div>
+                    <input type="file" accept="image/*" name="image" @change="updateImg($event)" style="display: none;" id="upfile" >
+                  </div>
+                  <div class="dp_photos_r">
+                      <img v-for="item in dp_img" :src="'https://tp.xiniuwangluo.cn' + item" alt="">
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/swiper-3.3.1.min.js"></script>
+<script src="js/cui.js"></script>
+<script src="js/flexible_css.js"></script>
+<script src="js/flexible.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=zaez3n0qVfp0bWlrEQq2C0iXasCcg4Vi"></script>
+<script src="./utils/util.js"></script>
+<script src="js/vue.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                iconPath:{
+                    iconStar0:'img/index/jsxq/icon/pingjiayemian-xingjiweixuanhzong@2x.png',
+                    iconStar1:'img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png'
+                },
+                diagnosisStar: 0,
+                diagnosisStar1: 0,
+                diagnosisStar2: 0,
+                dp_id:null,
+                jgid:null,
+                jgxx:{},
+                content:'',
+                dp_img:[],
+            },
+            created:function(){
+                var _this = this;
+                _this.dp_id = JSON.parse(sessionStorage.getItem('dp_id'))
+                _this.jgid = JSON.parse(sessionStorage.getItem('jgid'))
+                // 获取机构、教师、课程信息
+                _this.dpxx()
+            },
+            mounted: function (e) {
+                var _this = this;
+               
+            },
+            methods:{
+                updateImg: function (e) { //上传图片（返回全路径实现预览）
+                    var _this = this;
+                    var is = e.currentTarget;
+                    //创建FormData对象
+                    var data = new FormData();
+                    // console.log($(is)[0].files[0]);
+                    //为FormData对象添加数据
+                    $.each($(is)[0].files, function (i, file) {
+                        data.append('file', file);
+                        // console.log(file);
+                    });
+                    data.append('path', "uploads/images/");
+                    data.append('thumb', "0");
+                    console.log(data);
+                    // cui.showload({warp: ".lists", title: "图片上传中..", loading: {style: "ring"}});
+                    $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tlk/addtp.do',
+                        type: 'POST',
+                        data: data,
+                        cache: false,
+                        contentType: false, //不可缺
+                        processData: false, //不可缺
+                        success: function (ret) {
+                            cui.hideload();
+                            var ret = JSON.parse(ret);
+                            // console.log('后端返回图片地址',ret.url);
+                            if (ret.return_code == '1000') {
+                                let imgArr = []
+                                imgArr.push(ret.url)
+                                let ximgArr = [..._this.dp_img,...imgArr]
+                                _this.dp_img  = ximgArr.slice(-4)
+                            }
+                        },
+                        error: function (ret, err) {
+                            cui.hideload();
+                        }
+                    });
+                    
+                },
+                dpxx(){// 获取信息
+                    let _this = this
+                    if(_this.dp_id == 1){
+                        Api.doPost('/tlk/getjgxq.do',{"jg_id":_this.jgid},function(res){
+                            // console.log('机构信息',res.htjglist[0])
+                            _this.jgxx = res.htjglist[0]
+                        })
+                    }else if(_this.dp_id == 2){
+
+                    }else if(_this.dp_id == 3){
+                        
+                    }
+                },
+                getStar(item){ // 评星
+                    this.diagnosisStar = item
+                },
+                getStar1(item){ // 评星
+                    this.diagnosisStar1 = item
+                },
+                getStar2(item){ // 评星
+                    this.diagnosisStar2 = item
+                },
+                Back(){
+                    window.history.go(-1)
+                  },
+            }
+        })
+    }
+</script>
+</html>

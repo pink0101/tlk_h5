@@ -1,0 +1,97 @@
+.yjfl{
+  margin-top: 0.4rem;
+  border-bottom: 0.1rem solid rgba(244,244,244,1);;
+}
+.yjfl_title{
+  font-size:0.37rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:bold;
+  color:rgba(60,60,60,1);
+  padding-left:0.45rem;
+}
+.yjfl_item{
+  display: flex;
+  justify-content: space-between;
+  padding:0.45rem;
+}
+.yjfl_item img{
+  width:2.51rem;
+  height:1.44rem;
+  background:rgba(255,255,255,1);
+  box-shadow:0rem 0.2rem 0.4rem rgba(0,0,0,0.07);
+}
+.yjfl_item_active{
+  border-bottom: 0.04rem solid rgba(249,61,67,1);
+}
+.ej_title{
+  display: flex;
+  align-items: center;
+  height: 1.01rem;
+  border-bottom: 0.02rem solid rgba(244,244,244,1);;
+}
+.ej_item{
+  width:1.44rem;
+  height:0.48rem;
+  background:rgba(252,246,209,1);
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:0.27rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:400;
+  color:rgba(252,117,1,1);
+  margin-left: 0.2rem;
+}
+  .cnxh_item{
+    margin-top: 0.27rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.02rem solid rgba(244,244,244,1);
+    padding: 0 0.54rem 0.2rem;
+  }
+  .cnxh_item_img{
+    width:2.51rem;
+    height:2.51rem;
+    border-radius: 0.2rem;
+  }
+  .cnxh_item_right{
+    width: 6rem;
+    height:2.51rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.32rem 0;
+  }
+  .cnxh_item_right_1{
+    display: flex;
+    align-items: center;
+  }
+  .cnxh_item_right_1 img{
+    width:0.59rem;
+    height:0.27rem;
+    vertical-align:middle;
+    margin-left: 0.2rem;
+  }
+  .cnxh_item_right_1 div{
+    font-size:0.4rem;
+    font-family:Microsoft YaHei UI;
+    font-weight:bold;
+    color:rgba(51,51,51,1);
+    vertical-align:middle
+  }
+  .cnxh_item_right_2{
+    display: flex;
+  }
+  .cnxh_item_right_2 img{
+    width:0.32rem;
+    height:0.31rem;
+  }
+  .cnxh_item_right_3{
+    display: flex;
+    justify-content: space-between;
+    font-size:0.32rem;
+    font-family:Microsoft YaHei UI;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+  }

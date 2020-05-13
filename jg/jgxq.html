@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/cui.css">
+  <link rel="stylesheet" href="../css/swiper-3.3.1.min.css">
+  <link rel="stylesheet" href="../css/jg/jgxq.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <title>淘乐课</title>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <div class="map_top ">
+        <img src="../img/index/down-icon@2x.png" alt="" @click="Back()">
+        <div>机构详情</div>
+      </div>
+      <!-- 轮播图 -->
+      <div class="bg">
+        <div class="lbt">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" v-for="(item,index) in lbt">
+                <img class="lbt_img" :src="item" alt="" @click="privePhoto()" >
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination" style="color: #ffffff;"></div>
+          <div class="qb" v-if="zonum !== 0" @click="lbt_qb()">全部({{zonum}})</div>
+        </div>
+      </div>
+      <!-- 机构信息 -->
+      <div class="jg_xx">
+        <div class="jg_title">{{jgxq_sj.jg_name}}</div>
+        <div class="jg_pf">
+          <img src="../img/rangking/xingjixuanhzong@3x.png" alt="1">
+          <img src="../img/rangking/xingjixuanhzong@3x.png" alt="1">
+          <img src="../img/rangking/xingjixuanhzong@3x.png" alt="2">
+          <img src="../img/rangking/xingjixuanhzong@3x.png" alt="1">
+          <img src="../img/rangking/xingjixuanhzong@3x.png" alt="1">
+        </div>
+        <div class="jg_xx_bot">
+          <div>效果:4.4  &nbsp; 师资:4.4</div>
+          <div>{{jgxq_sj.jg_hyclassify}} &nbsp;{{jgxq_sj.jg_area}}</div>
+        </div>
+      </div>
+      <!-- 机构位置信息 -->
+      <div class="jg_wz">
+        <div class="jg_wz_left" @click="map()">
+          <img class="jg_wz_img" src="../img/index/jgxq/xiangxidizhi@2x.png" alt="">
+          <div class="jg_wz_name">{{jgxq_sj.jg_province}}{{jgxq_sj.jg_city}}市{{jgxq_sj.jg_area}}{{jgxq_sj.jg_address}}</div>
+        </div>
+        <div class="jg_wz_phone">
+          <img src="../img/index/jgxq/bodadianhua@2x.png" alt="" @click="phone_click(1)">
+        </div>
+      </div>
+      <!-- 特色课程 -->
+      <div class="tskc" v-if="kctype">
+        <div class="tskc_top">
+          <img src="../img/index/jgxq/jingpinke@2x.png" alt="">
+          <div>特色课程</div>
+        </div>
+        <div class="tskc_item" v-for="item in kclist" >
+          <img class="tskc_item_logo" :src="item.kc_logo" alt="">
+          <div class="tskc_item_right">
+            <div class="tskc_item_name">{{item.kc_name}}</div>
+            <div class="tskc_item_pf">
+              <img v-for="item in item.kc_pf" src="../img/index/jsxq/icon/pingjiayemian-xingjixuanhzong@2x.png" alt="">
+              <img v-for="item in 5 - item.kc_pf" src="../img/index/jsxq/icon/pingjiayemian-xingjiweixuanhzong@2x.png" alt="">
+            </div>
+            <div class="tskc_item_rc">
+              <div>{{item.kc_cys}}人参与</div>
+              <div class="tskc_item_je">
+                <div>￥</div>
+                <div>{{item.kc_money/100}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 名师风采 -->
+      <div class="msfc" v-if="jstype">
+        <div class="msfc_title">名师风采</div>
+        <div class="msfc_box">
+          <div class="msfc_item" v-for="item in jslist">
+            <img :src="item.js_logo" alt="">
+            <div>{{item.js_name}}</div>
+            <div>{{item.js_jl}}年教龄</div>
+          </div>
+        </div>
+      </div>
+      <!-- 机构详情 -->
+      <div class="jgxq_box">
+        <div>机构详情</div>
+        <div>{{jgxq_sj.jg_value}}</div>
+      </div>
+      <!-- 网友点评 -->
+      <div class="wydp" v-if="dplist[0]">
+        <div class="wydp_title">
+          <div>网友点评</div>
+          <img src="../img/index/jgxq/dizhixiangqing@2x.png" alt="">
+        </div>
+        <div class="wydp_item" v-for="item in dplist">
+          <img class="wydp_item_left" :src="item.url" alt="">
+          <div class="wydp_item_right">
+            <div class="wydp_item_right_item">
+              <div class="wydp_item_right_name">{{item.name}}</div>
+              <div class="wydp_item_right_pf">
+                <img v-for="item in item.pf" src="../img/rangking/xingjixuanhzong@3x.png" alt="">
+                <img v-for="item in 5 - item.pf" src="../img/index/jsxq/icon/pingjiayemian-xingjiweixuanhzong@2x.png" alt="">
+              </div>
+            </div>
+            <div class="wydp_item_right_sj">2020.01.12 </div>
+            <div class="wydp_item_right_value">{{item.value}}</div>
+            <div class="wydp_item_right_ptup" v-if="item.pf_url[0]">
+              <img v-for="item in item.pf_url" :src="'https://tp.xiniuwangluo.cn' + item" alt="" @click="privePhoto1()">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 商户信息 -->
+      <div class="shxx">
+        <div class="shxx_title">商户信息</div>
+        <div class="shxx_item">
+          <img src="../img/index/jgxq/shanghuxinxi-shijian@2x.png" alt="">
+          <div>{{!jgxq_sj.jg_yetime || jgxq_sj.jg_yetime == -1? '暂无数据':jgxq_sj.jg_yetime}}</div>
+        </div>
+      </div>
+      <!-- 轮播图片预览 -->
+      <div class="photo_prive"  style="display: none;"  @click="fousPhoto()">
+        <div class="swiper-container1">
+          <div class="swiper-wrapper" style="display: flex;align-items: center;">
+            <div class="swiper-slide" v-for="item in lbt" style="display: flex;align-items: center;width: 100% !important;">
+              <img class="prive_img" :src="item" alt="prive" >
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination" style="color: #ffffff;"></div>
+      </div>
+      <!-- 评论图片预览 -->
+      <div class="photo_prive1"  style="display: none;"  @click="fousPhoto1()">
+        <div class="swiper-container1">
+          <div class="swiper-wrapper" style="display: flex;align-items: center;">
+            <div class="swiper-slide" v-for="item in dptp" style="display: flex;align-items: center;width: 100% !important;">
+              <img class="prive_img" :src="'https://tp.xiniuwangluo.cn' + item" alt="prive" >
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination" style="color: #ffffff;"></div>
+      </div>
+      <!-- 拨打电话 -->
+      <div class="phone" v-if="isphone" @click="phone_click(0)">
+        <div class="phone_item">
+           <a @click.stop style="text-decoration: none;" :href="'tel:'+jgxq_sj.jg_tel">{{jgxq_sj.jg_tel}}</a>
+           <a @click.stop style="text-decoration: none;" :href="'tel:'+jgxq_sj.jg_tels" v-if="jgxq_sj.jg_tels !== ''">{{jgxq_sj.jg_tels}}</a>
+           <div @click="phone_click(0)">取消</div>
+        </div>
+      </div>
+    </div>
+    <!-- 底部 -->
+    <div class="jg_bottom">
+      <div class="jg_b_l">
+        <div class="jg_b_l_kf" @click="phone_click(1)">
+          <img src="../img/index/jgxq/kf.png" alt="">
+          <div>客服</div>
+        </div>
+        <div class="jg_b_l_fx">
+          <img src="../img/index/jgxq/huodong-fenxiang@2x.png" alt="">
+          <div>分享</div>
+        </div>
+      </div>
+      <div class="jg_b_r" @click="dp(1)">我要点评</div>
+    </div>
+  </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/swiper-3.3.1.min.js"></script>
+<script src="../js/cui.js"></script>
+<script src="../js/flexible_css.js"></script>
+<script src="../js/flexible.js"></script>
+<script src="../utils/util.js"></script>
+<script src="../js/vue.js"></script>
+<script>
+window.onload = function () {
+        var vm = new Vue({
+            el: "#app",
+            data: {
+              jgid:null,
+              jgxq_sj:{},
+              lbt:[
+                'https://tp.xiniuwangluo.cn/tlk/images/morentouxiangd@2x.png'
+              ],
+              zonum:null,
+              kclist:null,
+              kctype:null,
+              jslist:null,
+              jstype:null,
+              prive_fous:0,
+              prive_index:0,
+              isphone:0,
+              dplist:[],
+              dptp:null,
+              priveArr:[
+                'https://tp.xiniuwangluo.cn/tlk/images/morentouxiangd@2x.png'
+              ]
+            },
+            created:function(){
+              let _this= this
+              _this.jgid = JSON.parse(sessionStorage.getItem('jgid'))
+              // 获取机构详情
+              _this.jgxq()
+            },
+            mounted: function (e) {
+              var _this = this;
+              // 初始化轮播图
+              _this.initBanner();  
+              _this.initBanner1();  
+              },
+            methods:{
+              dp(id){ // 点评
+                window.sessionStorage.setItem('dp_id', JSON.stringify(id))
+                window.location='../dp.html'
+              },
+              map(){ // 调起地图
+                if (!this.jgxq_sj.e || !this.jgxq_sj.n) {
+                  cui.toast({title: '暂未添加数据', location: 'middle', showtime: 2000})
+                  return
+                }
+                window.location=`https://apis.map.qq.com/tools/poimarker?type=0&marker=coord:${this.jgxq_sj.n},${this.jgxq_sj.e};title:${this.jgxq_sj.jg_name}&key=W7TBZ-SU46S-N5DOS-62TLE-U4OV3-2OFU6&referer=myapp`
+              },
+              phone_click(zt){ // 调起电话
+                this.isphone = zt
+              },
+              lbt_qb(){ // 图片详情
+                window.location='photoxq.html'
+              },
+              fousPhoto(){ // 关闭预览图片
+                let _this = this
+                $('.photo_prive').css('display','none')
+              },
+              privePhoto(){ // 预览图片
+                let _this = this
+                $('.photo_prive').css('display','')
+                $('.swiper-slide').css('width','100%')
+              },
+              fousPhoto1(){ // 关闭预览图片
+                let _this = this
+                $('.photo_prive1').css('display','none')
+              },
+              privePhoto1(){ // 预览图片
+                let _this = this
+                $('.photo_prive1').css('display','')
+                $('.swiper-slide').css('width','100%')
+              },
+              jgxq(){ // 获取机构详情
+                  let _this = this
+                  $.ajax({
+                      url: 'https://tp.xiniuwangluo.cn/tlk/getjgxq.do',
+                      type: 'post',
+                      data: {"jg_id":_this.jgid},
+                      header: {
+                          'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                      },
+                      dataType:'json',
+                      cache: false,
+                      success: function (ret) {
+                                // console.log('机构详情',ret.htjglist[0])
+                                let zyarr = ret.htjglist[0].jg_zttp.split(",")
+                                zyarr.pop()
+                                let jgswiper =[]
+                                if (zyarr[0]){
+                                  jgswiper = zyarr.map(item => {
+                                    return 'https://tp.xiniuwangluo.cn' + item
+                                  })
+                                }else{
+                                  jgswiper = ['https://tp.xiniuwangluo.cn/tlk/images/morentouxiangd@2x.png']
+                                }
+                                //整体照片
+                                let ztnum = zyarr.length;
+                                //局部照片
+                                let jb = ret.htjglist[0].jg_jbtp.split(",")
+                                jb.pop()
+                                let jgzp = ztnum + jb.length;
+                                _this.zonum = jgzp
+                                // 轮播图数据
+                                _this.lbt = jgswiper
+                                _this.jgxq_sj = ret.htjglist[0]
+                            },
+                      error: function (ret, err) {
+                          cui.hideload();
+                      }
+                  });
+                  // 获取课程列表
+                  $.ajax({
+                      url: 'https://tp.xiniuwangluo.cn/tlkxcx/getjgkclist.do',
+                      type: 'post',
+                      data: {"jg_id":_this.jgid},
+                      header: {
+                          'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                      },
+                      dataType:'json',
+                      cache: false,
+                      success: function (ret) {
+                                // console.log('课程列表',ret.kclist)
+                                if(ret.kclist == undefined){
+                                  _this.kctype = 0
+                                }else{
+                                  ret.kclist.map((item, index) => {
+                                    if (item.kc_logo === '') {
+                                      return item.kc_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                    }
+                                    return item.kc_logo = 'https://tp.xiniuwangluo.cn' + item.kc_logo
+                                  })
+                                  _this.kctype = 1
+                                  _this.kclist = ret.kclist
+                                }
+                            },
+                      error: function (ret, err) {
+                          cui.hideload();
+                      }
+                  });
+                  // 获取教师列表
+                  $.ajax({
+                      url: 'https://tp.xiniuwangluo.cn/tlkxcx/getjgjslist.do',
+                      type: 'post',
+                      data: {"jg_id":_this.jgid},
+                      header: {
+                          'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                      },
+                      dataType:'json',
+                      cache: false,
+                      success: function (ret) {
+                                // console.log('教师列表',ret.jslist)
+                                if(ret.jslist == undefined){
+                                  _this.jstype = 0
+                                }else{
+                                  ret.jslist.map((item, index) => {
+                                    if (item.js_logo === '') {
+                                      return item.js_logo = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                                    }
+                                    return item.js_logo = 'https://tp.xiniuwangluo.cn' + item.js_logo
+                                  })
+                                  _this.jstype = 1
+                                  _this.jslist = ret.jslist
+                                }
+                            },
+                      error: function (ret, err) {
+                          cui.hideload();
+                      }
+                  });
+                  // 获取点评列表
+                  Api.doPost('/tlkxcx/getjgdplist.do',{"jg_id":_this.jgid},function(res){
+                        // console.log('机构点评数据：',res.dplist)
+                        if (res.dplist === undefined) {
+                          return
+                        }
+                        let dptp = []
+                        res.dplist.map((item, index) => {
+                          item.time = formatTime1(item.time,'Y年M月D日')
+                          if (item.pf_url[index] !== '') {
+                            let str = item.pf_url.slice(0, item.pf_url.length - 1)
+                            let ss = str.split(',')
+                            // console.log(ss)
+                            item.pf_url = ss
+                            if (ss[0] !== '') {
+                              dptp = [...dptp, ...ss]
+                            }
+                          }
+                          if(item.url == '123'){
+                            return item.url = 'https://tp.xiniuwangluo.cn/tlk/images/morentouxiang3@2x.png'
+                          }
+                        })
+                        _this.dplist = res.dplist
+                        _this.dptp = dptp
+                      })
+              },
+              Back(){
+                window.history.go(-1)
+              },
+              initBanner:function(){ // 初始化轮播图
+                    let _this = this
+                    var mySwiper = new Swiper('.swiper-container', {
+                        autoplay: 3000,//可选选项，自动滑动
+                        speed:500,
+                        pagination : '.swiper-pagination',
+                    })
+              },
+              initBanner1:function(){ // 初始化轮播图
+                    let _this = this
+                    var mySwiper = new Swiper('.swiper-container1', {
+                        // autoplay: 3000,//可选选项，自动滑动
+                        speed:500,
+                        pagination : '.swiper-pagination',
+                        paginationType : 'fraction',
+                        observeParents: true,
+                        observer:true,
+                        initialSlide:_this.prive_index,
+                    })
+              },
+            }
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="divport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/cui.css">
+    <link rel="stylesheet" href="css/zhd/zhd.css">
+    <link rel="stylesheet" href="css/common.css">
+    <title>淘乐课</title>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <!-- 头部导航栏 -->
+      <div class="top">
+        <div class="top_nav">
+          <img  class="nav_content" src="img/zhaohuodong/zhaohuodong-weizhi@2x.png"></img>
+          <div class="nav_left">雁塔区</div>
+        </div>
+        <!-- input框 -->
+        <div class="top_input">
+          <div class="top_input-left"></div>
+          <input class="search" placeholder="搜索机构分类、名称"></input>
+          <div class="loupe"> <img class="loupe_image" src="img/index/Icon-Search@2x.png"></img></div>
+      
+        </div>
+      </div>
+      <!-- 视频 -->
+      <div class="sp_list">
+        <div class="sp_item">
+          <img class="sp_logo_tu" src="https://tp.xiniuwangluo.cn/tlk/img/huodongbanner.png" alt="">
+          <div class="sp_item_b">
+            <div class="sp_item_b_l">
+              <div>2020年陕西省少儿春晚联欢会</div>
+              <div>音乐    雁塔区      2020.01.12 - 2020.2.12</div>
+            </div>
+            <img class="sp_item_b_r" src="img/zhaohuodong/zhoahuodong-jinxingzhong@2x.png" alt="">
+          </div>
+        </div>
+        <div class="sp_item">
+          <img class="sp_logo_tu" src="https://tp.xiniuwangluo.cn/tlk/img/huodongbanner.png" alt="">
+          <div class="sp_item_b">
+            <div class="sp_item_b_l">
+              <div>2020年陕西省少儿春晚联欢会</div>
+              <div>音乐    雁塔区      2020.01.12 - 2020.2.12</div>
+            </div>
+            <img class="sp_item_b_r" src="img/zhaohuodong/zhoahuodong-jinxingzhong@2x.png" alt="">
+          </div>
+        </div>
+        <div class="sp_item">
+          <img class="sp_logo_tu" src="https://tp.xiniuwangluo.cn/tlk/img/huodongbanner.png" alt="">
+          <div class="sp_item_b">
+            <div class="sp_item_b_l">
+              <div>2020年陕西省少儿春晚联欢会</div>
+              <div>音乐    雁塔区      2020.01.12 - 2020.2.12</div>
+            </div>
+            <img class="sp_item_b_r" src="img/zhaohuodong/zhoahuodong-jinxingzhong@2x.png" alt="">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- 底部tab -->
+    <div class="tabBar">
+        <div  class="tabBar_item" @click="index()">
+            <img src="./img/tabbar/shouyeweixuanzhong@2x.png" alt="">
+            <div>首页</div>
+        </div>
+        <div class="tabBar_item" >
+            <img src="./img/tabbar/zhaohuodongxuanzhong@2x.png" alt="">
+            <div>找活动</div>
+        </div>
+        <div class="tabBar_item" @click="phb()">
+            <img src="./img/tabbar/paihangbangweixuqanhzong@2x.png" alt="">
+            <div>排行榜</div>
+        </div>
+        <div class="tabBar_item" @click="wd()">
+            <img src="./img/tabbar/wodebuxuanzhong@2x.png" alt="">
+            <div>我的</div>
+        </div>
+    </div>
+  </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/cui.js"></script>
+<script src="js/flexible_css.js"></script>
+<script src="js/flexible.js"></script>
+<script src="js/vue.js"></script>
+<!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+
+<script type="text/javascript"> 
+  window.onload = function () {
+      var vm = new Vue({
+          el: "#app",
+          data: {
+            hd_list:[],// 活动列表
+          },
+          created:function(){
+            let _this = this
+            _this.zhd_list()
+          },
+          methods:{
+              zhd_list(){// 活动列表
+                $.ajax({
+                        url: 'https://tp.xiniuwangluo.cn/tlk/gethdlist.do',
+                        type: 'POST',
+                        data: {},
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                        },
+                        dataType:'json',
+                        cache: false,
+                        success: function (ret) {
+                            // console.log(ret)
+                        },
+                        error: function (ret, err) {
+                            cui.hideload();
+                        }
+                    });
+              },
+              index:function(){
+                window.location='index.html'
+              },
+              phb:function(){
+                window.location='phb.html'
+              },
+              wd:function(){
+                window.location='wd.html'
+              }
+          }
+      })
+  }
+</script>
+</html>

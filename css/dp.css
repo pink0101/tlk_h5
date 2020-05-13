@@ -1,0 +1,139 @@
+
+.dp_top{
+    margin-top: 1.9rem;
+    margin-left: 0.48rem;
+    display: flex;
+    justify-content: space-between;
+}
+.dp_top_l{
+    display: flex;
+    align-items: center;
+}
+.dp_top_l div{
+    font-size:0.37rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+color:rgba(51,51,51,1);
+max-width: 7rem;
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+}
+.dp_top_l img{
+    margin-left: 0.2rem;
+    width: 0.59rem;
+    height: 0.27rem;
+}
+.dp_top_r{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:2rem;
+height:0.8rem;
+background:rgba(255,226,7,1);
+border-top-left-radius: 1rem;
+border-bottom-left-radius: 1rem;
+font-size:0.4rem;
+font-family:Microsoft YaHei UI;
+font-weight:bold;
+line-height:0.35rem;
+color:rgba(51,51,51,1);
+}
+.dp_px{
+    margin-left: 0.48rem;
+}
+.dp_px_item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.2rem;
+}
+.dp_px_item div{
+    font-size:0.4rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(51,51,51,1);
+}
+.dp_px_item img{
+    margin-left: 0.2rem;
+    width:0.43rem;
+height:0.43rem;
+}
+.dp_content{
+    margin: 0.4rem 0.48rem 0;
+    position: relative;
+}
+.dp_content textarea{
+    width: 100%;
+    border: 0;
+    height:4.11rem;
+background:rgba(244,244,244,1);
+border-radius: 0.2rem;
+resize:none;
+font-size:0.4rem;
+line-height: 0.45rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(153,153,153,1);
+padding: 0.2rem 0.2rem;
+}
+.dp_content div{
+    position: absolute;
+    bottom: 0.37rem;
+    right: 0.15rem;
+    font-size:0.4rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(153,153,153,1);
+}
+.dp_photo{
+    margin-top: 0.37rem;
+    margin-left: 0.51rem;
+    display: flex;
+    flex-direction: column;
+}
+.dp_photo_title{
+    display: flex;
+}
+.dp_photo_title span{
+    color: #DD4432;
+    font-size: 0.4rem;
+}
+.dp_photo_title div{
+    font-size:0.4rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(204,204,204,1);
+}
+.dp_photos{
+    margin-top: 0.2rem;
+    display: flex;
+    align-items: center;
+}
+.dp_photos_l {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.dp_photo .dp_photos_l img{
+    width: 1.17rem;
+    height: 0.96rem;
+    margin-right: 0rem;
+    border-radius: 0rem;
+}
+.dp_photos_l div{
+    margin-top: 0.1rem;
+    font-size:0.3rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(204,204,204,1);
+}
+.dp_photos_r{
+    margin-left: 0.5rem;
+    display: flex;
+}
+.dp_photos img{
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 0.3rem;
+    border-radius: 0.3rem;
+}

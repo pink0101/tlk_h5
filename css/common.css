@@ -1,0 +1,137 @@
+*{
+  box-sizing: border-box;
+}
+[v-cloak] {
+  display: none;
+}
+.container{
+  margin-bottom: 1.41rem;
+}
+a:link { text-decoration: none;color:#ffffff} 
+a:active { text-decoration:blink;color:#ffffff} 
+a:hover { text-decoration:underline;color:#ffffff} 
+a:visited { text-decoration: none;color:#ffffff} 
+img{
+  vertical-align:bottom;
+   display:block;
+}
+.tabBar{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height:1.41rem;
+  width: 100%;
+  background:rgba(255,255,255,1);
+  box-shadow:0rem 0rem 0rem rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.19rem 0.93rem 0;
+}
+.tabBar_item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tabBar_item img{
+  width:0.69rem;
+  height:0.69rem;
+}
+.tabBar_item div{
+  margin-top: 0.05rem;
+  font-size:0.27rem;
+  font-family:Source Han Sans CN;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+}
+/* 顶部 */
+.map_top{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height:1.5rem;
+  background:rgba(251,226,63,1);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  z-index: 99;
+}
+.map_top img{
+  position: absolute;
+  margin-left: 0.43rem;
+  width:0.5rem;
+  height:0.5rem;
+}
+.map_top div{
+  font-size:0.43rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:bold;
+  color:rgba(60,60,60,1);
+  margin: 0 auto;
+}
+
+.photo_prive{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+.photo_prive1{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+.prive_img{
+  width: 100%;
+  display: block;
+}
+.phone{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:rgba(0,0,0,0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+.phone_item{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #ffffff;
+}
+.phone_item a{
+  display: flex;
+  justify-content: center;
+  padding: 0.43rem 0;
+  padding-bottom: 0.43rem;
+  border-bottom: 0.01rem solid #f4f4f4;
+  font-size:0.37rem;
+  font-family:Microsoft YaHei UI;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+}
+.phone_item div{
+  padding-top: 0.45rem;
+  border-top: 0.1rem solid #f4f4f4;
+  display: flex;
+  justify-content: center;
+  margin: 0rem 0 0.45rem;
+  font-size:0.32rem;
+font-family:Microsoft YaHei UI;
+font-weight:400;
+color:rgba(51,51,51,1);
+}
